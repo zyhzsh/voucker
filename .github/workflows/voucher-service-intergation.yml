@@ -9,7 +9,13 @@ on:
     
 jobs:
   build:
+
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: "./BE"
+
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -23,11 +29,11 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm install
-      working-directory: BE
+ 
       
     - name: Run Build 
       run: npm run build voucker --if-present
-      working-directory: BE
+
 
       
 
