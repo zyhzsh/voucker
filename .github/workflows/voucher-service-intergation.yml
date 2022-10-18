@@ -3,8 +3,12 @@ name: Node.js CI
 on:
   push:
     branches: [ "**" ]
+    paths:
+      - BE/**
   pull_request:
     branches: [ "main" ]
+    paths:
+      - BE/**
 
 jobs:
   build:
@@ -24,9 +28,9 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm ci
-      working-directory: ./BE      
+
     - name: Run Build 
       run: npm run build voucker --if-present
-      working-directory: ./BE
+
       
 #    - run: npm test
