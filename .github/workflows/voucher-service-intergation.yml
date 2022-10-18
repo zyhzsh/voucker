@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: './BE'
-          dockerfile: './BE/apps/voucher/Dockerfile'
+          file: './BE/apps/voucher/Dockerfile'
           target: development
           push: true
           tags: vouckerplatform/voucher-service:${{github.sha}}
