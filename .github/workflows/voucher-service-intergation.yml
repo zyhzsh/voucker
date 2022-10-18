@@ -3,21 +3,16 @@ name: Node.js CI
 on:
   push:
     branches: [ "**" ]
-    paths:
-      - BE/**
+    
   pull_request:
     branches: [ "main" ]
-    paths:
-      - BE/**
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
-
-
 
     steps:
     - uses: actions/checkout@v3
@@ -28,11 +23,11 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm install
-      working-directory: BE
+      working-directory: ./BE
       
     - name: Run Build 
       run: npm run build voucker --if-present
-      working-directory: BE
+      working-directory: ./BE
 
       
 
