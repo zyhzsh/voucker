@@ -1,14 +1,12 @@
 {
-  "name": "voucker_platfom",
+  "name": "voucker",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "preview": "turbo run preview",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
@@ -21,6 +19,9 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
+    "react-redux": "^8.0.4"
+  },
   "packageManager": "npm@8.5.0"
 }
