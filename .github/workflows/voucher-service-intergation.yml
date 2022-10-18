@@ -39,6 +39,6 @@ jobs:
       - name: Build/Push image        
         uses: docker/build-push-action@v3
         with:
-          context: "backend-voucher-service"
+          context: './BE/apps/voucher'
           push: true
           tags: vouckerplatform/voucher-service:${{github.sha}}
