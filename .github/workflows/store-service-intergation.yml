@@ -1,4 +1,4 @@
-name: Voucher Services CI/CD
+name: Store Services CI/CD
 on:
   push:
     branches: ['**']
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run Build
-        run: npm run build voucker --if-present
+        run: npm run build store --if-present
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: './BE'
-          file: './BE/apps/voucher/Dockerfile'
+          file: './BE/apps/store/Dockerfile'
           target: development
           push: true
-          tags: vouckerplatform/voucher-service:${{github.sha}}
+          tags: vouckerplatform/store-service:${{github.sha}}
