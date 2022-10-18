@@ -1,6 +1,7 @@
 version: '3.9'
 services:
   voucher:
+    container_name: voucher_service
     build:
       context: .
       dockerfile: ./apps/voucher/Dockerfile
@@ -17,6 +18,7 @@ services:
     ports:
       - '4000:3000'
   store:
+    container_name: store_service
     build:
       context: .
       dockerfile: ./apps/store/Dockerfile
@@ -35,11 +37,13 @@ services:
       - '4001:3000'
 
   rabbitmq:
+    container_name: event_bus
     image: rabbitmq
     ports:
       - '5672:5672'
 
   test_database:
+    container_name: test_database
     image: postgres
     restart: always
     ports:
