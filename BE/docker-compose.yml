@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/voucher/Dockerfile
-      # target: development
+      target: development
     env_file:
       - ./apps/voucher/.env.local.dev
     command: npm run start:dev voucher
@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/store/Dockerfile
-      # target: development
+      target: development
     env_file:
       - ./apps/store/.env.local.dev
     command: npm run start:dev store
