@@ -13,7 +13,7 @@ import { CreateVoucherRequest } from './dto/create-voucher.dto';
 import { GetAllVouchersQuery } from './dto/get-all-voucher-query.dto';
 import { VoucherService } from './voucher.service';
 
-@Controller('api/vouchers')
+@Controller('api/voucher')
 export class VoucherController {
   constructor(private readonly voucherService: VoucherService) {}
 
