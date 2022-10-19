@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  voucher:
+  voucher_service:
     container_name: voucher_service
     build:
       context: .
@@ -17,7 +17,7 @@ services:
       - /usr/src/app/node_modules
     ports:
       - '4000:3000'
-  store:
+  store_service:
     container_name: store_service
     build:
       context: .
@@ -35,13 +35,11 @@ services:
       - /usr/src/app/node_modules
     ports:
       - '4001:3000'
-
   rabbitmq:
     container_name: event_bus
     image: rabbitmq
     ports:
       - '5672:5672'
-
   test_database:
     container_name: test_database
     image: postgres
@@ -53,3 +51,10 @@ services:
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
+  nginx_load_balancer:
+    container_name: loader_balancer
+    image: nginx
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+    ports:
+      - '80:80'

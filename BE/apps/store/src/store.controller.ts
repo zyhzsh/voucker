@@ -3,7 +3,7 @@ import { Controller, Get } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { StoreService } from './store.service';
 
-@Controller()
+@Controller('api/store')
 export class StoreController {
   constructor(
     private readonly storeService: StoreService,
@@ -18,5 +18,9 @@ export class StoreController {
   @Get()
   test() {
     return 'sdsd';
+  }
+  @Get('/test')
+  test2() {
+    return 'hahahha';
   }
 }
