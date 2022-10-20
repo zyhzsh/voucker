@@ -12,6 +12,7 @@ export class LocationService {
     private readonly locationRepostiry: Repository<Location>,
   ) {}
   async getAllLocation() {
+    console.log('sdsd');
     return await this.locationRepostiry.find({
       order: {
         name: 'ASC',

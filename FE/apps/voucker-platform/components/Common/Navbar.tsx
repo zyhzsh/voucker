@@ -17,9 +17,9 @@ const Categories = [
   { id: 3, name: 'Activity' },
 ];
 
-const Navbar = () => {
+const Navbar = ({ link }: any) => {
   const { user, error, isLoading } = useUser();
-
+  console.log(link);
   return (
     <>
       <div className="navbar bg-base-100 h-24">
@@ -128,5 +128,29 @@ const Navbar = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  // const getLocations = await axios.get(
+  //   `${process.env.BACKEND_END_POINT}/api/location`
+  // );
+  //console.log(`${process.env.BACKEND_END_POINT}/api/location`);
+
+  // return 'link';
+  // const getCategorys = await axios.get(
+  //   `${process.env.BACKEND_END_POINT}/api/location`
+  // );
+
+  // console.log('datafetched:', getLocations);
+  // // const res = await fetch(`https://.../data`)
+  // // const data = await res.json()
+
+  // // Pass data to the page via props
+  // return { props: { data: getLocations } };
+
+  return {
+    props: { link: 'ddddddd' }, // will be passed to the page component as props
+  };
+}
 
 export default Navbar;
