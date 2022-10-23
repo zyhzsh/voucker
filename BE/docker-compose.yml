@@ -35,6 +35,40 @@ services:
       - /usr/src/app/node_modules
     ports:
       - '4001:3000'
+  location_service:
+    container_name: location_service
+    build:
+      context: .
+      dockerfile: ./apps/location/Dockerfile
+      target: development
+    env_file:
+      - ./apps/location/.env.local.dev
+    command: npm run start:dev location
+    depends_on:
+      - test_database
+      - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '4005:3000'
+  category_service:
+    container_name: category_service
+    build:
+      context: .
+      dockerfile: ./apps/category/Dockerfile
+      target: development
+    env_file:
+      - ./apps/category/.env.local.dev
+    command: npm run start:dev category
+    depends_on:
+      - test_database
+      - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '4004:3000'
   rabbitmq:
     container_name: event_bus
     image: rabbitmq

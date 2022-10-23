@@ -10,6 +10,7 @@ import {
   // UseGuards,
 } from '@nestjs/common';
 import { CreateVoucherRequest } from './dto/create-voucher.dto';
+import { FindVoucherQuery } from './dto/find-voucher-query.dto';
 import { GetAllVouchersQuery } from './dto/get-all-voucher-query.dto';
 import { VoucherService } from './voucher.service';
 
@@ -33,5 +34,10 @@ export class VoucherController {
     @Query() getAllVoucherQuery: GetAllVouchersQuery,
   ) {
     return this.voucherService.getAllPublishedVouchers(getAllVoucherQuery);
+  }
+
+  @Get('/detail')
+  async getVoucher(@Query() voucherId: FindVoucherQuery) {
+    return this.voucherService.findOne(voucherId.id);
   }
 }

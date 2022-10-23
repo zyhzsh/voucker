@@ -7,4 +7,7 @@ export class GetAllVouchersQuery extends PaginationQueryDto {
 
   @IsOptional()
   location: string;
+
+  @IsOptional()
+  search: string;
 }
