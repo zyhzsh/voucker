@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html {
+  background-color: #f0fdf4;
+}
+
+@layer components {
+  .btn {
+    @apply flex text-center justify-center font-mono  items-center rounded border border-transparent bg-teal-600 py-2 px-8  text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2;
+  }
+}

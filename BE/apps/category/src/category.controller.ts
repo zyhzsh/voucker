@@ -6,8 +6,7 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  getCategory(): string {
-    //return this.categoryService.getCategory();
-    return '';
+  getCategory() {
+    return this.categoryService.getCategory();
   }
 }

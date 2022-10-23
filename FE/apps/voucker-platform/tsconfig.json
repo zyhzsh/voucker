@@ -15,6 +15,14 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.css", "**.*.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.css",
+    "**.*.js",
+    "pages/index.jsx",
+    "app/components/NavBar.tsx"
+  ],
   "exclude": ["node_modules"]
 }

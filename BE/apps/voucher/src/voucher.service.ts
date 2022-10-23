@@ -27,9 +27,10 @@ export class VoucherService {
   async getAllVouchers(getAllVoucherQuery: GetAllVouchersQuery) {
     const { limit, offset, category, location } = getAllVoucherQuery;
     return this.voucherRepository.find({
+      relations: ['store'],
       where: {
-        category: category ? Like(`%${category}%`) : Like(`%`),
-        location: location ? Like(`%${location}%`) : Like(`%`),
+        category: category ? Like(`%${category.toLowerCase()}%`) : Like(`%`),
+        location: location ? Like(`%${location.toLowerCase()}%`) : Like(`%`),
       },
       skip: offset,
       take: limit,
@@ -37,15 +38,23 @@ export class VoucherService {
   }
 
   async getAllPublishedVouchers(getAllVoucherQuery: GetAllVouchersQuery) {
-    const { limit, offset, category, location } = getAllVoucherQuery;
+    const { limit, offset, category, location, search } = getAllVoucherQuery;
     return this.voucherRepository.find({
+      relations: ['store'],
       where: {
+        name: search ? Like(`%${search}%`) : Like(`%`),
         status: 'published',
         category: category ? Like(`%${category}%`) : Like(`%`),
         location: location ? Like(`%${location}%`) : Like(`%`),
       },
       skip: offset,
       take: limit,
+    });
+  }
+  async findOne(id: number) {
+    return this.voucherRepository.findOne({
+      relations: ['store'],
+      where: { id },
     });
   }
 }
