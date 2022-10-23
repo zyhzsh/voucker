@@ -33,7 +33,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
     const response = await fetch(
       `http://localhost/api/voucher/published/?location=${location.name}&category=${selectedCategory.name}`
     );
-    const data: Voucher[] = await response.json();
+    const data: Voucher[] = (await response?.json()) || [];
     setSelectedLocation(selectedLocation);
     setPublishedVouchers(data);
   };
@@ -41,7 +41,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
     const response = await fetch(
       `http://localhost/api/voucher/published/?location=${selectedLocation.name}&category=${category.name}`
     );
-    const data: Voucher[] = await response.json();
+    const data: Voucher[] = (await response?.json()) || [];
     setPublishedVouchers(data);
     setSelectedCategory(category);
   };
@@ -50,7 +50,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
     const response = await fetch(
       `http://localhost/api/voucher/published/?location=${selectedLocation.name}&category=${selectedCategory.name}&search=${userInput}`
     );
-    const data: Voucher[] = await response.json();
+    const data: Voucher[] = (await response?.json()) || [];
     setPublishedVouchers(data);
   };
 
@@ -75,13 +75,13 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const locationRes = await fetch('http://localhost/api/location');
-  const locations: Location[] = await locationRes.json();
+  const locations: Location[] = (await locationRes?.json()) || [];
   const categoryRes = await fetch('http://localhost/api/category');
-  const categories: Category[] = await categoryRes.json();
+  const categories: Category[] = (await categoryRes?.json()) || [];
   const voucherRes = await fetch(
     `http://localhost/api/voucher/published/?location=${locations[0].name}&category=${categories[0].name}`
   );
-  const vouchers: Voucher[] = await voucherRes.json();
+  const vouchers: Voucher[] = (await voucherRes?.json()) || [];
   return {
     props: {
       locations,

@@ -52,11 +52,11 @@ export default VoucherDetail;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
   const locationRes = await fetch('http://localhost/api/location');
-  const locations: Location[] = await locationRes.json();
+  const locations: Location[] = (await locationRes?.json()) || [];
   const voucherDetailRes = await fetch(
     `http://localhost/api/voucher/detail/?id=${id}`
   );
-  const voucher: Voucher = await voucherDetailRes.json();
+  const voucher: Voucher = (await voucherDetailRes?.json()) || {};
   return {
     props: {
       locations,

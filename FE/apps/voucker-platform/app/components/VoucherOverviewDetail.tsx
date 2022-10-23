@@ -1,6 +1,7 @@
 import React from 'react';
 import { Voucher } from '../types/Voucher';
 import Divided from './common/Divided';
+import { ShoppingBagIcon } from '@heroicons/react/24/solid';
 
 interface VoucherOverviewDetailProps {
   voucher: Voucher;
@@ -25,19 +26,24 @@ const VoucherOverviewDetail: React.FC<VoucherOverviewDetailProps> = ({
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">
             {voucher.name}
           </h1>
-          <div className="mt-3 bg-teal-600 text-center rounded-md">
-            <p className="text-4xl font-mono tracking-tight text-gray-900">
+          <div className="mt-3   ">
+            <p className="text-3xl font-mono tracking-tight text-gray-900">
               {voucher.price} Euro
             </p>
           </div>
-          <div className="mt-3 bg-blue-400 text-center rounded-md">
-            <p className="text-4xl font-mono tracking-tight text-gray-900">
+          <div className="mt-3  ">
+            <p className="text-1xl font-mono tracking-tight text-gray-900">
               Sold: {voucher.sold}
             </p>
           </div>
-          <div className="mt-3 bg-gray-400 text-center rounded-md">
-            <p className="text-4xl font-mono tracking-tight text-gray-900">
+          <div className="mt-3 ">
+            <p className="text-2xl font-mono tracking-tight text-gray-900">
               Inventory:{voucher.inventory}
+            </p>
+          </div>
+          <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
+            <p className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white">
+              <ShoppingBagIcon className="w-8" /> Get it now !!
             </p>
           </div>
           <div className="mt-3 text-center rounded-md">

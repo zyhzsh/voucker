@@ -1,5 +1,6 @@
 import React from 'react';
 import { Voucher } from '../types/Voucher';
+import Divided from './common/Divided';
 
 interface VoucherOverviewCardProps {
   voucher: Voucher;
@@ -11,18 +12,30 @@ const VoucherOverviewCard: React.FC<VoucherOverviewCardProps> = ({
   return (
     <a
       href={`/voucher/${voucher.id}`}
-      className="hover:shadow-lg w-54 self-center justify-self-center h-72 bg-slate-200 overflow-hidden p-2"
+      className="font-mono flex flex-col shadow-md hover:shadow-xl w-54 self-center justify-self-center h-72 bg-gray-100 rounded-md overflow-hidden p-2"
     >
-      <img src={voucher.imageurl} alt="" className="w-full h-36 object-fill" />
-      <div className="w-54  h-5 overflow-hidden">{voucher.name}</div>
-      <div className="w-54  h-5 overflow-hidden">
-        Price:{voucher.price} Euro
+      <img
+        src={voucher.imageurl}
+        alt="voucher image"
+        className="w-full h-36 object-fill rounded-md"
+      />
+      <div className="w-54 h-5  overflow-hidden text-center font-bold">
+        {voucher.name}
       </div>
-      <div className="w-54  h-5 overflow-hidden">
-        Inventory:{voucher.inventory}
+      <div className="flex justify-center pt-1">
+        <Divided />
       </div>
-      <div className="w-54  h-5 overflow-hidden">Sold:{voucher.sold}</div>
-      <div className="w-54 h-12  overflow-hidden">{voucher.description}</div>
+      <p className="pl-2 w-54 h-5 overflow-hidden  ">{voucher.price} Euro</p>
+      <div className="pl-2 w-54 h-5 overflow-hidden ">
+        {voucher.inventory} Left
+      </div>
+      <div className=" pl-2 w-54 h-5 overflow-hidden ">Sold:{voucher.sold}</div>
+      <div className="flex justify-center pt-1">
+        <Divided />
+      </div>
+      <div className="pl-2 w-54 h-12  overflow-hidden text-xs">
+        {voucher.description}
+      </div>
     </a>
   );
 };

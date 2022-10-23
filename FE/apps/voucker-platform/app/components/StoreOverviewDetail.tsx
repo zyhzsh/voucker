@@ -1,6 +1,7 @@
 import React from 'react';
 import { Store } from '../types/Store';
-import Divided from './common/Divided';
+
+import { MapPinIcon, GlobeAltIcon, PhoneIcon } from '@heroicons/react/24/solid';
 
 interface StoreOverviewDetailProps {
   store: Store;
@@ -26,22 +27,19 @@ const StoreOverviewDetail: React.FC<StoreOverviewDetailProps> = ({ store }) => {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">
             {store.name}
           </h1>
-          <div className="mt-3 bg-teal-600 text-center rounded-md">
-            <p className="text-xl font-mono tracking-tight text-gray-900">
-              Address: {store.address}
+          <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
+            <p className="flex gap-1 justify-center py-2 text-2xl font-mono tracking-tight  text-white">
+              <MapPinIcon className="w-8" /> {store.address}
             </p>
           </div>
-          <div className="mt-3 bg-blue-400 text-center rounded-md hover:bg-blue-500">
-            <a
-              href={store.website}
-              className="text-4xl font-mono tracking-tight text-gray-900"
-            >
-              Website
-            </a>
+          <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
+            <p className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white">
+              <GlobeAltIcon className="w-8" /> Website
+            </p>
           </div>
-          <div className="mt-3 bg-gray-400 text-center rounded-md">
-            <p className="text-4xl font-mono tracking-tight text-gray-900">
-              {store.phone}
+          <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
+            <p className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white">
+              <PhoneIcon className="w-8" /> {store.phone}
             </p>
           </div>
           <div className="mt-3 text-center rounded-md">
