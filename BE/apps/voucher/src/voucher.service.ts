@@ -40,7 +40,6 @@ export class VoucherService {
   async getAllPublishedVouchers(getAllVoucherQuery: GetAllVouchersQuery) {
     const { limit, offset, category, location, search } = getAllVoucherQuery;
     return this.voucherRepository.find({
-      relations: ['store'],
       where: {
         name: search ? Like(`%${search}%`) : Like(`%`),
         status: 'published',
