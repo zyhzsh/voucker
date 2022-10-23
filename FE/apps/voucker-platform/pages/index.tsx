@@ -78,7 +78,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const locations: Location[] = await locationRes.json();
   const categoryRes = await fetch('http://localhost/api/category');
   const categories: Category[] = await categoryRes.json();
-  const voucherRes = await fetch('http://localhost/api/voucher/published/');
+  const voucherRes = await fetch(
+    `http://localhost/api/voucher/published/?location=${locations[0].name}&category=${categories[0].name}`
+  );
   const vouchers: Voucher[] = await voucherRes.json();
   return {
     props: {

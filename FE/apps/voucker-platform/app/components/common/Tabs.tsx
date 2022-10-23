@@ -40,10 +40,3 @@ const Tabs: React.FC<TabsProps> = ({ tabs, selectedTab, onSelect }) => {
   );
 };
 export default Tabs;
-// className={classNames(
-//   tab.name.toLocaleLowerCase() ===
-//     selectedTab.name.toLocaleLowerCase()
-//     ? 'bg-teal-700 text-white'
-//     : 'text-gray-500 hover:text-gray-700',
-//   'px-3 py-2 font-medium text-sm rounded-md'
-// )}

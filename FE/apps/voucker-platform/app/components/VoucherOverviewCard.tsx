@@ -11,7 +11,7 @@ const VoucherOverviewCard: React.FC<VoucherOverviewCardProps> = ({
   return (
     <a
       href={`/voucher/${voucher.id}`}
-      className=" w-54 self-center justify-self-center h-72 bg-slate-200 overflow-hidden p-2"
+      className="hover:shadow-lg w-54 self-center justify-self-center h-72 bg-slate-200 overflow-hidden p-2"
     >
       <img src={voucher.imageurl} alt="" className="w-full h-36 object-fill" />
       <div className="w-54  h-5 overflow-hidden">{voucher.name}</div>
