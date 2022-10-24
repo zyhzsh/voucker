@@ -7,6 +7,7 @@ import CategoryFilter from '../app/components/CategoryFilter';
 import Search from '../app/components/common/Search';
 import { Voucher } from '../app/types/Voucher';
 import VoucherList from '../app/components/VoucherList';
+import Footer from '../app/components/common/Footer';
 
 interface HomePageProps {
   locations: Location[];
@@ -55,20 +56,23 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
   };
 
   return (
-    <div>
-      <NavBar
-        onSelectLocation={onChangeLocation}
-        locations={alllocations}
-        defaultLocation={selectedLocation}
-      />
-      <CategoryFilter
-        onSelectedCategory={onChangeCategory}
-        selectedCategory={selectedCategory}
-        categories={allCategories}
-      />
-      <Search onSearch={SearchVouchers} />
-      <VoucherList vouchers={publishedVouchers} />
-    </div>
+    <>
+      <div className="mb-5 min-h-[80vh]">
+        <NavBar
+          onSelectLocation={onChangeLocation}
+          locations={alllocations}
+          defaultLocation={selectedLocation}
+        />
+        <CategoryFilter
+          onSelectedCategory={onChangeCategory}
+          selectedCategory={selectedCategory}
+          categories={allCategories}
+        />
+        <Search onSearch={SearchVouchers} />
+        <VoucherList vouchers={publishedVouchers} />
+      </div>
+      <Footer />
+    </>
   );
 };
 export default Home;
