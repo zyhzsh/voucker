@@ -1,4 +1,4 @@
-name: Store Services CI/CD
+name: Category Service CI/CD
 on:
   push:
     branches: ['**']
