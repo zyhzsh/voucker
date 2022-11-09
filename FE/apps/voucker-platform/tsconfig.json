@@ -22,7 +22,7 @@
     "**/*.css",
     "**.*.js",
     "pages/index.jsx",
-    "app/components/NavBar.tsx"
-  ],
+    "app/components/NavBar.jsx"
+, "app/components/common/ComboBox.jsx"  ],
   "exclude": ["node_modules"]
 }
