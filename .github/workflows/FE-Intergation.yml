@@ -1,5 +1,5 @@
 
-name: Store Services CI/CD
+name: FE CI/CD
 on:
   push:
     branches: ['**']
