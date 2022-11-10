@@ -40,6 +40,6 @@ jobs:
         with:
           context: './BE'
           file: './BE/apps/store/Dockerfile'
-          target: development
+          target: production
           push: true
           tags: vouckerplatform/store-service:${{github.sha}}
