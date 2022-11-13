@@ -11,7 +11,7 @@ services:
     command: npm run start:dev voucher
     depends_on:
       - test_database
-      - rabbitmq
+    #      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -29,7 +29,7 @@ services:
 
     depends_on:
       - test_database
-      - rabbitmq
+    #     - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -46,7 +46,7 @@ services:
     command: npm run start:dev location
     depends_on:
       - test_database
-      - rabbitmq
+    #     - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -63,18 +63,18 @@ services:
     command: npm run start:dev category
     depends_on:
       - test_database
-      - rabbitmq
+    #     - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
       - '4004:3000'
-  rabbitmq:
-    container_name: event_bus
-    image: rabbitmq:3-management
-    ports:
-      - '8080:15672'
-      - '5672:5672'
+  # rabbitmq:
+  #   container_name: event_bus
+  #   image: rabbitmq:3-management
+  #   ports:
+  #     - '8080:15672'
+  #     - '5672:5672'
 
   test_database:
     container_name: test_database
