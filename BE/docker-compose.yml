@@ -71,9 +71,11 @@ services:
       - '4004:3000'
   rabbitmq:
     container_name: event_bus
-    image: rabbitmq
+    image: rabbitmq:3-management
     ports:
+      - '8080:15672'
       - '5672:5672'
+
   test_database:
     container_name: test_database
     image: postgres
