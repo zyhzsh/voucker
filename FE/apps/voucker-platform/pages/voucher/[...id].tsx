@@ -1,7 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import CategoryFilter from '../../app/components/CategoryFilter';
 import CommentOverviewDetail from '../../app/components/CommentOverviewDetail';
 
 import NavBar from '../../app/components/NavBar';

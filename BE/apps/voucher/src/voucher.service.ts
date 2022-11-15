@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository } from 'typeorm';
+import { ILike, Like, Repository } from 'typeorm';
 import { STORE_SERVICE } from '../constants/services';
 import { CreateVoucherRequest } from './dto/create-voucher.dto';
 import { GetAllVouchersQuery } from './dto/get-all-voucher-query.dto';
@@ -41,7 +41,7 @@ export class VoucherService {
     const { limit, offset, category, location, search } = getAllVoucherQuery;
     return this.voucherRepository.find({
       where: {
-        name: search ? Like(`%${search}%`) : Like(`%`),
+        name: search ? ILike(`%${search}%`) : Like(`%`),
         status: 'published',
         category: category ? Like(`%${category}%`) : Like(`%`),
         location: location ? Like(`%${location}%`) : Like(`%`),
