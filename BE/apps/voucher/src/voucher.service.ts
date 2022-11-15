@@ -29,8 +29,8 @@ export class VoucherService {
     return this.voucherRepository.find({
       relations: ['store'],
       where: {
-        category: category ? Like(`%${category.toLowerCase()}%`) : Like(`%`),
-        location: location ? Like(`%${location.toLowerCase()}%`) : Like(`%`),
+        category: category ? ILike(`%${category.toLowerCase()}%`) : Like(`%`),
+        location: location ? ILike(`%${location.toLowerCase()}%`) : Like(`%`),
       },
       skip: offset,
       take: limit,
@@ -43,8 +43,8 @@ export class VoucherService {
       where: {
         name: search ? ILike(`%${search}%`) : Like(`%`),
         status: 'published',
-        category: category ? Like(`%${category}%`) : Like(`%`),
-        location: location ? Like(`%${location}%`) : Like(`%`),
+        category: category ? ILike(`%${category}%`) : Like(`%`),
+        location: location ? ILike(`%${location}%`) : Like(`%`),
       },
       skip: offset,
       take: limit,
