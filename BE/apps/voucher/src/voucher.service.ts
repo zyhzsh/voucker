@@ -19,9 +19,7 @@ export class VoucherService {
   ) {}
 
   async createVoucher(request: CreateVoucherRequest) {
-    console.log('voucher-side:', request);
     return request;
-    // return this.voucherRepository.create(request);
   }
 
   async getAllVouchers(getAllVoucherQuery: GetAllVouchersQuery) {
