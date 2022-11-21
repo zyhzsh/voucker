@@ -14,7 +14,7 @@ const CustomerNavOptions = [
 ];
 
 const VendorNavOptions = [
-  { link: '#', name: 'Your store' },
+  { link: '/store-management', name: 'Your store' },
   { link: '#', name: 'Your order' },
   { link: '#', name: 'Your voucher' },
   { link: '/api/auth/logout', name: 'logout' },

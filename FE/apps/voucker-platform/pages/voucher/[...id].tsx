@@ -35,7 +35,7 @@ export default VoucherDetail;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
   const voucherDetailRes = await fetch(
-    `http://localhost/api/voucher/detail/?id=${id}`
+    `${process.env.BACKEND_URL}/voucher/detail/?id=${id}`
   );
   const voucher: Voucher = (await voucherDetailRes?.json()) || {};
   return {

@@ -1,5 +1,12 @@
-import { RmqService } from '@app/common';
-import { Controller, Get } from '@nestjs/common';
+import { AuthorizationGuard, PermissionsGuard, RmqService } from '@app/common';
+//import { GetUserId } from '@app/common/auth/authHandler';
+import {
+  //Headers,
+  Controller,
+  Get,
+  Param,
+  UseGuards,
+} from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { StoreService } from './store.service';
 
@@ -15,12 +22,18 @@ export class StoreController {
     console.log('store-side:', data);
     this.rmqService.ack(context);
   }
-  @Get()
-  test() {
-    return 'sdsd';
+
+  // Get Vendor's Store
+  @Get('/mystores/:id')
+  @UseGuards(AuthorizationGuard, PermissionsGuard)
+  getStores(@Param('id') id: string) {
+    return this.storeService.getMyStores(id);
   }
-  @Get('/test')
-  test2() {
-    return 'hahahha';
+
+  // Get Vendor's Voucher's
+  @Get('/myvouchers/:id')
+  @UseGuards(AuthorizationGuard, PermissionsGuard)
+  getVouchers(@Param('id') id: string) {
+    return this.storeService.getMyVouchers(id);
   }
 }
