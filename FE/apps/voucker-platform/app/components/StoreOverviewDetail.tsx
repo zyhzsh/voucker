@@ -28,19 +28,29 @@ const StoreOverviewDetail: React.FC<StoreOverviewDetailProps> = ({ store }) => {
             {store.name}
           </h1>
           <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
-            <p className="flex gap-1 justify-center py-2 text-2xl font-mono tracking-tight  text-white">
+            <a
+              href={`http://maps.google.com/?q=${store.address}`}
+              className="flex gap-1 justify-center py-2 text-2xl font-mono tracking-tight  text-white"
+            >
               <MapPinIcon className="w-8" /> {store.address}
-            </p>
+            </a>
           </div>
           <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
-            <p className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white">
-              <GlobeAltIcon className="w-8" /> Website
-            </p>
+            <a
+              href={store.website}
+              className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white"
+            >
+              <GlobeAltIcon className="w-8" />
+              Website
+            </a>
           </div>
           <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
-            <p className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white">
+            <a
+              href={`tel:${store.phone}`}
+              className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white"
+            >
               <PhoneIcon className="w-8" /> {store.phone}
-            </p>
+            </a>
           </div>
           <div className="mt-3 text-center rounded-md">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900">

@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   //Get,
   Post,
   Query,
@@ -12,6 +13,7 @@ import {
 import { CreateVoucherRequest } from './dto/create-voucher.dto';
 import { FindVoucherQuery } from './dto/find-voucher-query.dto';
 import { GetAllVouchersQuery } from './dto/get-all-voucher-query.dto';
+import { PublishVoucherRequest } from './dto/publish-voucher.dto';
 import { VoucherService } from './voucher.service';
 
 @Controller('api/voucher')
@@ -34,6 +36,11 @@ export class VoucherController {
     @Query() getAllVoucherQuery: GetAllVouchersQuery,
   ) {
     return this.voucherService.getAllPublishedVouchers(getAllVoucherQuery);
+  }
+
+  @Patch('/publish')
+  async publishVoucher(@Query() publishVoucherQuery: PublishVoucherRequest) {
+    return this.voucherService.publishVoucher(publishVoucherQuery);
   }
 
   @Get('/detail')

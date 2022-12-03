@@ -25,12 +25,16 @@ export class StoreService {
   }
   async getMyVouchers(vendorId: string) {
     return await this.voucherRepository.find({
-      relations: { store: false },
+      relations: { store: true },
       where: {
         store: {
           owner_id: vendorId,
         },
       },
     });
+  }
+
+  async publishVoucher(voucherId: number) {
+    this.voucherRepository.update({ id: voucherId }, { status: 'published' });
   }
 }

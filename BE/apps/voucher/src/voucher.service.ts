@@ -5,6 +5,7 @@ import { ILike, Like, Repository } from 'typeorm';
 import { STORE_SERVICE } from '../constants/services';
 import { CreateVoucherRequest } from './dto/create-voucher.dto';
 import { GetAllVouchersQuery } from './dto/get-all-voucher-query.dto';
+import { PublishVoucherRequest } from './dto/publish-voucher.dto';
 import { Store } from './entities/store.entity';
 import { Voucher } from './entities/voucher.entity';
 
@@ -15,6 +16,7 @@ export class VoucherService {
     private readonly voucherRepository: Repository<Voucher>,
     @InjectRepository(Store)
     private readonly storeRepostiry: Repository<Store>,
+    //Send Message
     @Inject(STORE_SERVICE) private storeClient: ClientProxy,
   ) {}
 
@@ -53,5 +55,16 @@ export class VoucherService {
       relations: ['store'],
       where: { id },
     });
+  }
+
+  async publishVoucher({ voucherId, ownerId }: PublishVoucherRequest) {
+    const updatedResult = await this.voucherRepository
+      .createQueryBuilder()
+      .update({ status: 'published' })
+      .where({ id: voucherId }, { store: { ownerId: ownerId } })
+      .returning('*')
+      .execute();
+    this.storeClient.emit('voucher_published', updatedResult.raw[0]);
+    return updatedResult.raw[0];
   }
 }

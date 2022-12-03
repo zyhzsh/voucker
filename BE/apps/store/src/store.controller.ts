@@ -5,9 +5,11 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   UseGuards,
 } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
+import { Voucher } from './entities/voucher.entity';
 import { StoreService } from './store.service';
 
 @Controller('api/store')
@@ -17,9 +19,14 @@ export class StoreController {
     private readonly rmqService: RmqService,
   ) {}
 
-  @EventPattern('voucher_created')
-  async text(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log('store-side:', data);
+  @EventPattern('voucher_published')
+  async voucherPublished(
+    @Payload() voucher: Voucher,
+    @Ctx() context: RmqContext,
+  ) {
+    const { id } = voucher;
+    console.log('store-side:', voucher);
+    this.storeService.publishVoucher(id);
     this.rmqService.ack(context);
   }
 
