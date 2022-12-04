@@ -5,7 +5,7 @@ import { VoucherService } from './voucher.service';
 import * as Joi from 'joi';
 
 import { ConfigModule } from '@nestjs/config';
-import { STORE_SERVICE } from '../constants/services';
+import { STORE_SERVICE, INVENTORY_SERVICE } from '../constants/services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Voucher } from './entities/voucher.entity';
 import { Store } from './entities/store.entity';
@@ -42,8 +42,12 @@ import { Store } from './entities/store.entity';
     }),
     TypeOrmModule.forFeature([Voucher, Store]),
     //Register comsuer serviers
+
     RmqModule.register({
       name: STORE_SERVICE,
+    }),
+    RmqModule.register({
+      name: INVENTORY_SERVICE,
     }),
   ],
   controllers: [VoucherController],

@@ -26,7 +26,7 @@ export class StoreController {
   ) {
     const { id } = voucher;
     console.log('store-side:', voucher);
-    this.storeService.publishVoucher(id);
+    await this.storeService.publishVoucher(id);
     this.rmqService.ack(context);
   }
 

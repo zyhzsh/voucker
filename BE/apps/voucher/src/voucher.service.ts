@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Like, Repository } from 'typeorm';
-import { STORE_SERVICE } from '../constants/services';
+import { INVENTORY_SERVICE, STORE_SERVICE } from '../constants/services';
 import { CreateVoucherRequest } from './dto/create-voucher.dto';
 import { GetAllVouchersQuery } from './dto/get-all-voucher-query.dto';
 import { PublishVoucherRequest } from './dto/publish-voucher.dto';
@@ -18,6 +18,7 @@ export class VoucherService {
     private readonly storeRepostiry: Repository<Store>,
     //Send Message
     @Inject(STORE_SERVICE) private storeClient: ClientProxy,
+    @Inject(INVENTORY_SERVICE) private inventoryClient: ClientProxy,
   ) {}
 
   async createVoucher(request: CreateVoucherRequest) {
@@ -64,7 +65,9 @@ export class VoucherService {
       .where({ id: voucherId }, { store: { ownerId: ownerId } })
       .returning('*')
       .execute();
-    this.storeClient.emit('voucher_published', updatedResult.raw[0]);
+    const voucher = updatedResult.raw[0];
+    this.storeClient.emit('voucher_published', voucher);
+    this.inventoryClient.emit('voucher_published', voucher);
     return updatedResult.raw[0];
   }
 }

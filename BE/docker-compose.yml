@@ -69,12 +69,40 @@ services:
       - /usr/src/app/node_modules
     ports:
       - '4004:3000'
-  # rabbitmq:
-  #   container_name: event_bus
-  #   image: rabbitmq:3-management
-  #   ports:
-  #     - '8080:15672'
-  #     - '5672:5672'
+  order_service:
+    container_name: order_service
+    build:
+      context: .
+      dockerfile: ./apps/order/Dockerfile
+      target: development
+    env_file:
+      - ./apps/order/.env.local.dev
+    command: npm run start:dev order
+    depends_on:
+      - test_database
+    #     - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '4002:3000'
+  inventory_service:
+    container_name: inventory_service
+    build:
+      context: .
+      dockerfile: ./apps/inventory/Dockerfile
+      target: development
+    env_file:
+      - ./apps/inventory/.env.local.dev
+    command: npm run start:dev inventory
+    depends_on:
+      - test_database
+      #     - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '4003:3000'
 
   test_database:
     container_name: test_database
@@ -94,3 +122,10 @@ services:
       - ./nginx/default.conf:/etc/nginx/nginx.conf
     ports:
       - '80:80'
+
+  # rabbitmq:
+  #   container_name: event_bus
+  #   image: rabbitmq:3-management
+  #   ports:
+  #     - '8080:15672'
+  #     - '5672:5672'
