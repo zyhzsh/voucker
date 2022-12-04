@@ -17,6 +17,12 @@ export class OrderController {
     this.rmqService.ack(context);
   }
 
+  @EventPattern('order_confirm_failed')
+  orderConfirmFailed(@Payload() id: string, @Ctx() context: RmqContext) {
+    this.orderService.cancelOrder(id);
+    this.rmqService.ack(context);
+  }
+
   @Get('/myorder/:id')
   getMyOrders(@Param('id') user_id: string) {
     return this.orderService.getMyOrders(user_id);

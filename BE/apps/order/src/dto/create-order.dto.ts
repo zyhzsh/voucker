@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsPositive, IsString } from 'class-validator';
 
 export class CreateOrderDto {
   @IsString()
@@ -12,4 +12,8 @@ export class CreateOrderDto {
 
   @IsString()
   voucher_imageurl: string;
+
+  @IsNumber()
+  @IsPositive()
+  price: number;
 }

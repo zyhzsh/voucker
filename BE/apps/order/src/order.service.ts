@@ -15,7 +15,10 @@ export class OrderService {
   ) {}
 
   getMyOrders(user_id: string) {
-    return this.orderRepository.find({ where: { user_id } });
+    return this.orderRepository.find({
+      where: { user_id },
+      order: { created_at: 'ASC' },
+    });
   }
 
   async createOrder(newOrder: CreateOrderDto) {
@@ -32,5 +35,9 @@ export class OrderService {
 
   async confirmOrder(order_id: string) {
     this.orderRepository.update({ id: order_id }, { status: 'created' });
+  }
+
+  async cancelOrder(order_id: string) {
+    this.orderRepository.update({ id: order_id }, { status: 'cancelled' });
   }
 }

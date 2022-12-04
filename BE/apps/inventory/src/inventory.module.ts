@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { RmqModule } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Invenotry } from './entities/inventory.entity';
+import { Inventory } from './entities/inventory.entity';
 import {
   ORDER_SERVICE,
   STORE_SERVICE,
@@ -41,7 +41,7 @@ import {
       synchronize: true,
       entities: ['dist/inventory/**/*.entity.js'],
     }),
-    TypeOrmModule.forFeature([Invenotry]),
+    TypeOrmModule.forFeature([Inventory]),
     //Register comsuer serviers
     RmqModule.register({
       name: STORE_SERVICE,

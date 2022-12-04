@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class Invenotry {
+export class Inventory {
   @PrimaryColumn()
   voucher_id: number;
 

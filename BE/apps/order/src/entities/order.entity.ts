@@ -19,6 +19,9 @@ export class Order {
   @Column()
   voucher_id: number;
 
+  @Column()
+  price: number;
+
   @Column({
     type: 'enum',
     enum: ['created', 'cancelled', 'pennding', 'completed'],

@@ -8,13 +8,13 @@ import {
   VOUCHER_SERVICE,
 } from '../constants/services';
 import { OrderCreatedDto } from './dto/order-created.dto';
-import { Invenotry } from './entities/inventory.entity';
+import { Inventory } from './entities/inventory.entity';
 
 @Injectable()
 export class InventoryService {
   constructor(
-    @InjectRepository(Invenotry)
-    private readonly inventoryRepository: Repository<Invenotry>,
+    @InjectRepository(Inventory)
+    private readonly inventoryRepository: Repository<Inventory>,
     @Inject(VOUCHER_SERVICE) private voucherClient: ClientProxy,
     @Inject(STORE_SERVICE) private storeClient: ClientProxy,
     @Inject(ORDER_SERVICE) private orderClient: ClientProxy,
@@ -32,7 +32,7 @@ export class InventoryService {
       //this.storeClient.emit('order_confirmed', voucher_id);
       //this.voucherClient.emit('inventory_updated', voucher_id);
     } else {
-      this.orderClient.emit('inventory_', id);
+      this.orderClient.emit('order_confirm_failed', id);
     }
   }
 }
