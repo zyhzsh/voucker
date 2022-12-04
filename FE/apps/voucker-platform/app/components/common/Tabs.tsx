@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 
 interface Option {
   id: number;
@@ -12,11 +11,10 @@ interface TabsProps {
 }
 
 const Tabs: React.FC<TabsProps> = ({ tabs, selectedTab, onSelect }) => {
-  const [selected, setSelected] = useState({ id: 20, name: 'Activitity' });
 
   return (
     <div>
-      <div className="hidden sm:block">
+      <div className="block">
         <nav className="flex space-x-4">
           {tabs.map((tab) => (
             <button

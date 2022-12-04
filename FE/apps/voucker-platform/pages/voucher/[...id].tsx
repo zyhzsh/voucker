@@ -16,11 +16,11 @@ interface ProductDetailPageProps {
   store: Store;
 }
 
-const VoucherDetail: NextPage<ProductDetailPageProps> = ({
+const VoucherDetail = ({
   locations,
   voucher,
   store,
-}) => {
+}: ProductDetailPageProps) => {
   // Locations
   const [alllocations, setAllLocations] = useState<Location[]>(locations);
   const [selectedLocation, setSelectedLocation] = useState<Location>(
