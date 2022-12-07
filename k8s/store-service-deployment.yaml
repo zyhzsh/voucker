@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: category-service-api
+  name: store-service-api
 spec:
   selector:
     matchLabels:
-      app: category-service-api
+      app: store-service-api
   replicas: 1
   template:
     metadata:
       labels:
-        app: category-service-api
+        app: store-service-api
     spec:
       containers:
-        - name: category-service-api
-          image: vouckerplatform/category-service
+        - name: store-service-api
+          image: vouckerplatform/store-service
           env:
             - name: RABBIT_MQ_URI
               value: 'amqp://35.233.103.73:5672'
-            - name: RABBIT_MQ_CATEGORY_QUEUE
-              value: 'CATEGORY'
+            - name: RABBIT_MQ_STORE_QUEUE
+              value: 'STORE'
             - name: PORT
               value: '3000'
             - name: AUTH0_AUDIENCE
@@ -35,17 +35,17 @@ spec:
             - name: DATABASE_HOST
               value: '34.141.243.91'
             - name: DATABASE_NAME
-              value: category_db
+              value: store_db
           ports:
             - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: category-service-api
+  name: store-service-api
 spec:
   selector:
-    app: category-service-api
+    app: store-service-api
   ports:
     - protocol: TCP
       port: 3000

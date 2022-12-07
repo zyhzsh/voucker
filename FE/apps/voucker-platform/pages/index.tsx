@@ -32,7 +32,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
 
   const onChangeLocation = async (location: Location) => {
     const response = await fetch(
-      `http://localhost/api/voucher/published/?location=${location.name}&category=${selectedCategory.name}`
+      `${process.env.NEXT_PUBLIC_URL}/voucher/published/?location=${location.name}&category=${selectedCategory.name}`
     );
     const data: Voucher[] = (await response?.json()) || [];
     setSelectedLocation(selectedLocation);
@@ -40,7 +40,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
   };
   const onChangeCategory = async (category: Category) => {
     const response = await fetch(
-      `http://localhost/api/voucher/published/?location=${selectedLocation.name}&category=${category.name}`
+      `${process.env.NEXT_PUBLIC_URL}/voucher/published/?location=${selectedLocation.name}&category=${category.name}`
     );
     const data: Voucher[] = (await response?.json()) || [];
     setPublishedVouchers(data);
@@ -48,7 +48,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
   };
   const SearchVouchers = async (userInput: string) => {
     const response = await fetch(
-      `http://localhost/api/voucher/published/?location=${selectedLocation.name}&category=${selectedCategory.name}&search=${userInput}`
+      `${process.env.NEXT_PUBLIC_URL}/voucher/published/?location=${selectedLocation.name}&category=${selectedCategory.name}&search=${userInput}`
     );
     const data: Voucher[] = (await response?.json()) || [];
     setPublishedVouchers(data);
