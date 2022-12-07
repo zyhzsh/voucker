@@ -17,23 +17,23 @@ spec:
           image: vouckerplatform/location-service
           env:
             - name: RABBIT_MQ_URI
-              value: 'amqp://35.233.103.73:5672'
+              value: ${{ secrets.RABBIT_MQ_URI  }}
             - name: RABBIT_MQ_LOCATION_QUEUE
               value: 'LOCATION'
             - name: PORT
               value: '3000'
             - name: AUTH0_AUDIENCE
-              value: 'voucker-nestjs-api'
+              value: ${{ secrets.AUTH0_AUDIENCE  }}
             - name: AUTH0_DOMAIN
-              value: 'https://dev-gl5r1aa7.eu.auth0.com/'
+              value: ${{ secrets.AUTH0_DOMAIN  }}
             - name: DATABASE_USER
-              value: 'dev'
+              value: ${{ secrets.DATABASE_USER  }}
             - name: DATABASE_PASSWORD
-              value: 'a7758258'
+              value: ${{ secrets.DATABASE_PASSWORD  }}
             - name: DATABASE_PORT
-              value: '5432'
+              value: ${{ secrets.DATABASE_PORT  }}
             - name: DATABASE_HOST
-              value: '34.141.243.91'
+              value: ${{ secrets.DATABASE_HOST  }}
             - name: DATABASE_NAME
               value: location_db
           ports:
