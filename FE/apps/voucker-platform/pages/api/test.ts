@@ -6,5 +6,6 @@ export default async function getAnswersByQuestionId(
   res: NextApiResponse
 ) {
   const { accessToken } = await getAccessToken(req, res);
+  console.log('tttttttttttttt');
   res.status(200).json({ accessToken });
 }

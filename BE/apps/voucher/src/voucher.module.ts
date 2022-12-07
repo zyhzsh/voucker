@@ -42,7 +42,6 @@ import { Store } from './entities/store.entity';
     }),
     TypeOrmModule.forFeature([Voucher, Store]),
     //Register comsuer serviers
-
     RmqModule.register({
       name: STORE_SERVICE,
     }),

@@ -15,7 +15,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     const result = await axios.patch(
       `${process.env.BACKEND_URL}/voucher/publish/?voucherId=${voucherId}&ownerId=${ownerId}`
     );
-    console.log(result.data);
     res.status(200).json(result.data);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }

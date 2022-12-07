@@ -35,6 +35,9 @@ export class Order {
   @Column()
   voucher_imageurl: string;
 
+  @Column()
+  voucher_description: string;
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',

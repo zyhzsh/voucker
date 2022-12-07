@@ -2,14 +2,37 @@ import React from 'react';
 import { Voucher } from '../types/Voucher';
 import Divided from './common/Divided';
 import { ShoppingBagIcon } from '@heroicons/react/24/solid';
-
+import axios from 'axios';
+import { useRouter } from 'next/router';
 interface VoucherOverviewDetailProps {
   voucher: Voucher;
 }
-
 const VoucherOverviewDetail: React.FC<VoucherOverviewDetailProps> = ({
   voucher,
 }) => {
+  const router = useRouter();
+
+  const placeOrderHandler = async () => {
+    const newOrder = {
+      voucher_name: voucher.name,
+      voucher_imageurl: voucher.imageurl,
+      price: voucher.price,
+      voucher_description: voucher.description,
+    };
+    const result = await axios.post(
+      `/api/order/placeorder/${voucher.id}`,
+      newOrder
+    );
+    if (result) {
+      // alert('Order successfully created');
+      router.push({
+        pathname: '/orders',
+      });
+    } else {
+      alert('Order creation failed');
+    }
+  };
+
   return (
     <div className="px-10 pt-4 flex flex-col gap-4">
       <div className="flex flex-wrap justify-center gap-4 md:justify-center md:gap-10">
@@ -42,7 +65,10 @@ const VoucherOverviewDetail: React.FC<VoucherOverviewDetailProps> = ({
             </p>
           </div>
           <div className="mt-3 bg-teal-600 text-center rounded-md hover:bg-teal-800 ">
-            <p className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white">
+            <p
+              onClick={placeOrderHandler}
+              className=" flex gap-8 justify-center text-3xl font-mono tracking-tight  text-white"
+            >
               <ShoppingBagIcon className="w-8" /> Get it now !!
             </p>
           </div>

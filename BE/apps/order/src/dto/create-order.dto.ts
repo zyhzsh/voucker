@@ -16,4 +16,7 @@ export class CreateOrderDto {
   @IsNumber()
   @IsPositive()
   price: number;
+
+  @IsString()
+  voucher_description?: string;
 }

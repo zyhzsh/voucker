@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { Voucher } from '../types/Voucher';
 import Divided from './common/Divided';

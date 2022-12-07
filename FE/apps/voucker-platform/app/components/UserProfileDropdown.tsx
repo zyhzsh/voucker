@@ -8,15 +8,15 @@ function classNames(...classes: any) {
 }
 
 const CustomerNavOptions = [
-  { link: '#', name: 'Your order' },
+  { link: '/orders', name: 'Your order' },
   { link: '#', name: 'Your voucher' },
   { link: '/api/auth/logout', name: 'logout' },
 ];
 
 const VendorNavOptions = [
   { link: '/store-management', name: 'Your store' },
-  { link: '#', name: 'Your order' },
-  { link: '#', name: 'Your voucher' },
+  // { link: '/orders', name: 'Your order' },
+  // { link: '#', name: 'Your voucher' },
   { link: '/api/auth/logout', name: 'logout' },
 ];
 

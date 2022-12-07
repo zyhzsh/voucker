@@ -34,9 +34,18 @@ export default VoucherDetail;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
+
   const voucherDetailRes = await fetch(
     `${process.env.BACKEND_URL}/voucher/detail/?id=${id}`
   );
+  if (voucherDetailRes.status !== 200) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
   const voucher: Voucher = (await voucherDetailRes?.json()) || {};
   return {
     props: {

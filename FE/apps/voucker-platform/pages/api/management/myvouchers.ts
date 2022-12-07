@@ -10,7 +10,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   } = req;
   const voucherId = id;
   const ownerId = getUserId(accessToken);
-  console.log(id);
   try {
     const result = axios.patch(
       `${process.env.BACKEND_URL}/voucher/publish/?voucherId=${voucherId}&ownerId=${ownerId}`

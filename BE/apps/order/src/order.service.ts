@@ -17,7 +17,7 @@ export class OrderService {
   getMyOrders(user_id: string) {
     return this.orderRepository.find({
       where: { user_id },
-      order: { created_at: 'ASC' },
+      order: { created_at: 'DESC' },
     });
   }
 
