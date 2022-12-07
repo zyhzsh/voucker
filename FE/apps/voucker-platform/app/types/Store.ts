@@ -1,3 +1,5 @@
+import { Voucher } from './Voucher';
+
 export interface Store {
   id: number;
   name: string;
@@ -10,4 +12,5 @@ export interface Store {
   category: string;
   location: string;
   address: string;
+  vouchers?: Voucher[];
 }

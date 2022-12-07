@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: location-service-api
+spec:
+  selector:
+    matchLabels:
+      app: location-service-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: location-service-api
+    spec:
+      containers:
+        - name: location-service-api
+          image: vouckerplatform/location-service
+          env:
+            - name: RABBIT_MQ_URI
+              value: ${{ secrets.RABBIT_MQ_URI  }}
+            - name: RABBIT_MQ_LOCATION_QUEUE
+              value: 'LOCATION'
+            - name: PORT
+              value: '3000'
+            - name: AUTH0_AUDIENCE
+              value: ${{ secrets.AUTH0_AUDIENCE  }}
+            - name: AUTH0_DOMAIN
+              value: ${{ secrets.AUTH0_DOMAIN  }}
+            - name: DATABASE_USER
+              value: ${{ secrets.DATABASE_USER  }}
+            - name: DATABASE_PASSWORD
+              value: ${{ secrets.DATABASE_PASSWORD  }}
+            - name: DATABASE_PORT
+              value: ${{ secrets.DATABASE_PORT  }}
+            - name: DATABASE_HOST
+              value: ${{ secrets.DATABASE_HOST  }}
+            - name: DATABASE_NAME
+              value: location_db
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: location-service-api
+spec:
+  selector:
+    app: location-service-api
+  ports:
+    - protocol: TCP
+      port: 3000
+  type: LoadBalancer

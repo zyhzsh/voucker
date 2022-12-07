@@ -2,9 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Like, Repository } from 'typeorm';
-import { STORE_SERVICE } from '../constants/services';
+import { INVENTORY_SERVICE, STORE_SERVICE } from '../constants/services';
 import { CreateVoucherRequest } from './dto/create-voucher.dto';
 import { GetAllVouchersQuery } from './dto/get-all-voucher-query.dto';
+import { PublishVoucherRequest } from './dto/publish-voucher.dto';
 import { Store } from './entities/store.entity';
 import { Voucher } from './entities/voucher.entity';
 
@@ -15,13 +16,13 @@ export class VoucherService {
     private readonly voucherRepository: Repository<Voucher>,
     @InjectRepository(Store)
     private readonly storeRepostiry: Repository<Store>,
+    //Send Message
     @Inject(STORE_SERVICE) private storeClient: ClientProxy,
+    @Inject(INVENTORY_SERVICE) private inventoryClient: ClientProxy,
   ) {}
 
   async createVoucher(request: CreateVoucherRequest) {
-    console.log('voucher-side:', request);
     return request;
-    // return this.voucherRepository.create(request);
   }
 
   async getAllVouchers(getAllVoucherQuery: GetAllVouchersQuery) {
@@ -29,8 +30,8 @@ export class VoucherService {
     return this.voucherRepository.find({
       relations: ['store'],
       where: {
-        category: category ? Like(`%${category.toLowerCase()}%`) : Like(`%`),
-        location: location ? Like(`%${location.toLowerCase()}%`) : Like(`%`),
+        category: category ? ILike(`%${category.toLowerCase()}%`) : Like(`%`),
+        location: location ? ILike(`%${location.toLowerCase()}%`) : Like(`%`),
       },
       skip: offset,
       take: limit,
@@ -43,8 +44,8 @@ export class VoucherService {
       where: {
         name: search ? ILike(`%${search}%`) : Like(`%`),
         status: 'published',
-        category: category ? Like(`%${category}%`) : Like(`%`),
-        location: location ? Like(`%${location}%`) : Like(`%`),
+        category: category ? ILike(`%${category}%`) : Like(`%`),
+        location: location ? ILike(`%${location}%`) : Like(`%`),
       },
       skip: offset,
       take: limit,
@@ -55,5 +56,18 @@ export class VoucherService {
       relations: ['store'],
       where: { id },
     });
+  }
+
+  async publishVoucher({ voucherId, ownerId }: PublishVoucherRequest) {
+    const updatedResult = await this.voucherRepository
+      .createQueryBuilder()
+      .update({ status: 'published' })
+      .where({ id: voucherId }, { store: { ownerId: ownerId } })
+      .returning('*')
+      .execute();
+    const voucher = updatedResult.raw[0];
+    this.storeClient.emit('voucher_published', voucher);
+    this.inventoryClient.emit('voucher_published', voucher);
+    return updatedResult.raw[0];
   }
 }

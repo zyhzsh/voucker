@@ -6,6 +6,7 @@ import { StoreService } from './store.service';
 import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Store } from './entities/store.entity';
+import { Voucher } from './entities/voucher.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -36,7 +37,7 @@ import { Store } from './entities/store.entity';
       synchronize: true,
       entities: ['dist/store/**/*.entity.js'],
     }),
-    TypeOrmModule.forFeature([Store]),
+    TypeOrmModule.forFeature([Store, Voucher]),
     //TODO:  //Register comsuer serviers
     RmqModule,
   ],

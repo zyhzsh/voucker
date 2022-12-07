@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service-api
+spec:
+  selector:
+    matchLabels:
+      app: inventory-service-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: inventory-service-api
+    spec:
+      containers:
+        - name: inventory-service-api
+          image: vouckerplatform/inventory-service
+          env:
+            - name: RABBIT_MQ_URI
+              value: ${{ secrets.RABBIT_MQ_URI  }}
+            - name: RABBIT_MQ_INVENTORY_QUEUE
+              value: 'INVENTORY'
+            - name: RABBIT_MQ_ORDER_QUEUE
+              value: 'ORDER'
+            - name: RABBIT_MQ_STORE_QUEUE
+              value: 'STORE'
+            - name: RABBIT_MQ_VOUCHER_QUEUE
+              value: 'VOUCHER'
+            - name: PORT
+              value: '3000'
+            - name: AUTH0_AUDIENCE
+              value: ${{ secrets.AUTH0_AUDIENCE  }}
+            - name: AUTH0_DOMAIN
+              value: ${{ secrets.AUTH0_DOMAIN  }}
+            - name: DATABASE_USER
+              value: ${{ secrets.DATABASE_USER  }}
+            - name: DATABASE_PASSWORD
+              value: ${{ secrets.DATABASE_PASSWORD  }}
+            - name: DATABASE_PORT
+              value: ${{ secrets.DATABASE_PORT  }}
+            - name: DATABASE_HOST
+              value: ${{ secrets.DATABASE_HOST  }}
+            - name: DATABASE_NAME
+              value: inventory_db
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service-api
+spec:
+  selector:
+    app: inventory-service-api
+  ports:
+    - protocol: TCP
+      port: 3000
+  type: LoadBalancer

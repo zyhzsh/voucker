@@ -21,8 +21,9 @@ async function bootstrap() {
       },
     }),
   );
-  app.enableCors({ origin: ['http://localhost:3000'] });
+
   const configService = app.get(ConfigService);
+  app.enableCors({ origin: [configService.get('CLIENTS_SITE')] });
   await app.startAllMicroservices();
   await app.listen(configService.get('PORT'));
 }

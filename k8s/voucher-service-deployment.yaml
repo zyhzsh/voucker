@@ -14,7 +14,34 @@ spec:
     spec:
       containers:
         - name: voucher-service-api
-          image: mguay/nestjs-k8s
+          image: vouckerplatform/voucher-service
+          env:
+            - name: RABBIT_MQ_URI
+              value: ${{ secrets.RABBIT_MQ_URI }}
+            - name: RABBIT_MQ_VOUCHER_QUEUE
+              value: 'VOUCHER'
+            - name: RABBIT_MQ_STORE_QUEUE
+              value: 'STORE'
+            - name: RABBIT_MQ_INVENTORY_QUEUE
+              value: 'INVENTORY'
+            - name: PORT
+              value: '3000'
+            - name: AUTH0_AUDIENCE
+              value: ${{ secrets.AUTH0_AUDIENCE }}
+            - name: AUTH0_DOMAIN
+              value: ${{ secrets.AUTH0_DOMAIN }}
+            - name: DATABASE_USER
+              value: ${{ secrets.DATABASE_USER }}
+            - name: DATABASE_PASSWORD
+              value: ${{ secrets.DATABASE_PASSWORD }}
+            - name: DATABASE_PORT
+              value: ${{ secrets.DATABASE_PORT }}
+            - name: DATABASE_HOST
+              value: ${{ secrets.DATABASE_HOST }}
+            - name: DATABASE_NAME
+              value: voucher_db
+            - name: CLIENTS_SITE
+              value: ${{ secrets.CLIENTS_SITE }}
           ports:
             - containerPort: 3000
 ---

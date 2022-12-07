@@ -1,6 +1,15 @@
-import { RmqService } from '@app/common';
-import { Controller, Get } from '@nestjs/common';
+import { AuthorizationGuard, PermissionsGuard, RmqService } from '@app/common';
+//import { GetUserId } from '@app/common/auth/authHandler';
+import {
+  //Headers,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  UseGuards,
+} from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
+import { Voucher } from './entities/voucher.entity';
 import { StoreService } from './store.service';
 
 @Controller('api/store')
@@ -10,17 +19,28 @@ export class StoreController {
     private readonly rmqService: RmqService,
   ) {}
 
-  @EventPattern('voucher_created')
-  async text(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log('store-side:', data);
+  @EventPattern('voucher_published')
+  async voucherPublished(
+    @Payload() voucher: Voucher,
+    @Ctx() context: RmqContext,
+  ) {
+    const { id } = voucher;
+    console.log('store-side:', voucher);
+    await this.storeService.publishVoucher(id);
     this.rmqService.ack(context);
   }
-  @Get()
-  test() {
-    return 'sdsd';
+
+  // Get Vendor's Store
+  @Get('/mystores/:id')
+  @UseGuards(AuthorizationGuard, PermissionsGuard)
+  getStores(@Param('id') id: string) {
+    return this.storeService.getMyStores(id);
   }
-  @Get('/test')
-  test2() {
-    return 'hahahha';
+
+  // Get Vendor's Voucher's
+  @Get('/myvouchers/:id')
+  @UseGuards(AuthorizationGuard, PermissionsGuard)
+  getVouchers(@Param('id') id: string) {
+    return this.storeService.getMyVouchers(id);
   }
 }
