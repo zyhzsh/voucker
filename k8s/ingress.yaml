@@ -27,3 +27,10 @@ spec:
                 name: inventory-service-api-svc
                 port:
                   number: 3000
+          - path: /api/order
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service-api-svc
+                port:
+                  number: 3000
