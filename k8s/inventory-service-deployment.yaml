@@ -17,7 +17,11 @@ spec:
           image: vouckerplatform/inventory-service
           env:
             - name: RABBIT_MQ_URI
-              value: ${{ secrets.RABBIT_MQ_URI  }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: RABBIT_MQ_URI
+                  optional: false
             - name: RABBIT_MQ_INVENTORY_QUEUE
               value: 'INVENTORY'
             - name: RABBIT_MQ_ORDER_QUEUE
@@ -29,17 +33,41 @@ spec:
             - name: PORT
               value: '3000'
             - name: AUTH0_AUDIENCE
-              value: ${{ secrets.AUTH0_AUDIENCE  }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: AUTH0_AUDIENCE
+                  optional: false
             - name: AUTH0_DOMAIN
-              value: ${{ secrets.AUTH0_DOMAIN  }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: AUTH0_DOMAIN
+                  optional: false
             - name: DATABASE_USER
-              value: ${{ secrets.DATABASE_USER  }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_USER
+                  optional: false
             - name: DATABASE_PASSWORD
-              value: ${{ secrets.DATABASE_PASSWORD  }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_PASSWORD
+                  optional: false
             - name: DATABASE_PORT
-              value: ${{ secrets.DATABASE_PORT  }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_PORT
+                  optional: false
             - name: DATABASE_HOST
-              value: ${{ secrets.DATABASE_HOST  }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_HOST
+                  optional: false
             - name: DATABASE_NAME
               value: inventory_db
           ports:
@@ -48,11 +76,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: inventory-service-api
+  name: inventory-service-api-svc
 spec:
   selector:
     app: inventory-service-api
   ports:
     - protocol: TCP
       port: 3000
-  type: LoadBalancer
+  type: ClusterIP
