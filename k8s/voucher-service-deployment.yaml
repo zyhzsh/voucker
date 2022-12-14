@@ -17,7 +17,11 @@ spec:
           image: vouckerplatform/voucher-service
           env:
             - name: RABBIT_MQ_URI
-              value: ${{ secrets.RABBIT_MQ_URI }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: RABBIT_MQ_URI
+                  optional: false
             - name: RABBIT_MQ_VOUCHER_QUEUE
               value: 'VOUCHER'
             - name: RABBIT_MQ_STORE_QUEUE
@@ -27,32 +31,60 @@ spec:
             - name: PORT
               value: '3000'
             - name: AUTH0_AUDIENCE
-              value: ${{ secrets.AUTH0_AUDIENCE }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: AUTH0_AUDIENCE
+                  optional: false
             - name: AUTH0_DOMAIN
-              value: ${{ secrets.AUTH0_DOMAIN }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: AUTH0_DOMAIN
+                  optional: false
             - name: DATABASE_USER
-              value: ${{ secrets.DATABASE_USER }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_USER
+                  optional: false
             - name: DATABASE_PASSWORD
-              value: ${{ secrets.DATABASE_PASSWORD }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_PASSWORD
+                  optional: false
             - name: DATABASE_PORT
-              value: ${{ secrets.DATABASE_PORT }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_PORT
+                  optional: false
             - name: DATABASE_HOST
-              value: ${{ secrets.DATABASE_HOST }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: DATABASE_HOST
+                  optional: false
             - name: DATABASE_NAME
               value: voucher_db
             - name: CLIENTS_SITE
-              value: ${{ secrets.CLIENTS_SITE }}
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: CLIENTS_SITE
+                  optional: false
           ports:
             - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: voucher-service-api
+  name: voucher-service-api-svc
 spec:
   selector:
     app: voucher-service-api
   ports:
     - protocol: TCP
       port: 3000
-  type: LoadBalancer
+  type: ClusterIP

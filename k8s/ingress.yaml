@@ -41,3 +41,10 @@ spec:
                 name: store-service-api-svc
                 port:
                   number: 3000
+          - path: /api/voucher
+            pathType: Prefix
+            backend:
+              service:
+                name: voucher-service-api-svc
+                port:
+                  number: 3000
