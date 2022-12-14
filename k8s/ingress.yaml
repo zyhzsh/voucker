@@ -34,3 +34,10 @@ spec:
                 name: order-service-api-svc
                 port:
                   number: 3000
+          - path: /api/store
+            pathType: Prefix
+            backend:
+              service:
+                name: store-service-api-svc
+                port:
+                  number: 3000
