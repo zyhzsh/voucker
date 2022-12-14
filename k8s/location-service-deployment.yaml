@@ -14,7 +14,14 @@ spec:
     spec:
       containers:
         - name: location-service-api
-          image: vouckerplatform/location-service
+          image: vouckerplatform/location-service:test
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
           env:
             - name: RABBIT_MQ_URI
               valueFrom:

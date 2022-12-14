@@ -7,6 +7,7 @@ import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Store } from './entities/store.entity';
 import { Voucher } from './entities/voucher.entity';
+import { HealthController } from './healthcheck.controller';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -41,7 +42,7 @@ import { Voucher } from './entities/voucher.entity';
     //TODO:  //Register comsuer serviers
     RmqModule,
   ],
-  controllers: [StoreController],
+  controllers: [StoreController, HealthController],
   providers: [StoreService],
 })
 export class StoreModule {}

@@ -15,6 +15,13 @@ spec:
       containers:
         - name: category-service-api
           image: vouckerplatform/category-service
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
           env:
             - name: RABBIT_MQ_URI
               valueFrom:

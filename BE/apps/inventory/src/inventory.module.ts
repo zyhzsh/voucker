@@ -11,6 +11,7 @@ import {
   STORE_SERVICE,
   VOUCHER_SERVICE,
 } from '../constants/services';
+import { HealthController } from './healthcheck.controller';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -53,7 +54,7 @@ import {
       name: ORDER_SERVICE,
     }),
   ],
-  controllers: [InventoryController],
+  controllers: [InventoryController, HealthController],
   providers: [InventoryService],
 })
 export class InventoryModule {}
