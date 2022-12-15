@@ -1,4 +1,4 @@
-name: Category Service CI/CD
+name: Category Service CI/CD - gcp
 on:
   push:
     branches: ['main']
