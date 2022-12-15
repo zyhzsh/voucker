@@ -7,7 +7,7 @@ on:
 
 env:
   PROJECT_ID: ${{secrets.GKE_PROJECT}}
-  GAR_LOCATION: europe
+#  GAR_LOCATION: europe
   GKE_CLUSTER: autopilot-cluster-voucker-platform
   GKE_ZONE: europe-west1
   DEPLOYMENT_NAME: github_action_automation_deployment_category_service_api
@@ -15,7 +15,8 @@ env:
   # TAG: 0.0.1
 
 jobs:
-  setup-build-publish-deply:
+
+  setup-build-publish-deploy:
     name: Set up Build Publish Deploy
     runs-on: ubuntu-latest
     environment: production
@@ -31,21 +32,33 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v0'
+#       - id: 'auth'
+#         uses: 'google-github-actions/auth@v0'
+#         with:
+#            credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - name: Setup Google Cloud CLI
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.3
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-           credentials_json: '${{ secrets.GKE_SA_KEY }}'
-           
+          service-account_key: ${{secrets.GKE_SA_KEY}}
+          project_id: ${{secrets.GKE_PROJECT}}
+    
       - name: Docker configuration
         run: |-
            gcloud auth configure-docker --quiet
- 
       - name: Set up GKE credentials
-        uses: google-github-actions/get-gke-credentials@v0
-        with:
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}      
-          project_id: voucher
+        run: |-
+           gcloud container cluster get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+      
+      
+#       - name: Set up GKE credentials
+#         uses: google-github-actions/get-gke-credentials@v0
+#         with:
+#           cluster_name: ${{ env.GKE_CLUSTER }}
+#           location: ${{ env.GKE_ZONE }}      
+#           project_id: voucher
       
 
 
