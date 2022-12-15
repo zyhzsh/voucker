@@ -6,7 +6,7 @@ on:
     branches: ['main']
 
 env:
-  PROJECT_ID: ${{secrets.GKE_PROJECT}}
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
 #  GAR_LOCATION: europe
   GKE_CLUSTER: autopilot-cluster-voucker-platform
   GKE_ZONE: europe-west1
