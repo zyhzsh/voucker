@@ -65,7 +65,7 @@ jobs:
         run: npm run build category --if-present
 
       - name: Build
-        run: echo pwd
+        run: pwd
         
       
           
