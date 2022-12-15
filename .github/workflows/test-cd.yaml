@@ -72,9 +72,10 @@ jobs:
            --build-arg GITHUB_REF="$GITHUB_REF" \
            -f ./apps/category/Dockerfile .
           
-#       - name: Publish
-#         run: |-
-#           docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"
+      - name: Publish
+        run: |-
+            docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+
           
           
   
