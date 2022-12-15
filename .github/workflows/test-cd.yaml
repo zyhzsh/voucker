@@ -57,11 +57,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: './BE/package-lock.json'
+          
       - name: Install dependencies
         run: npm ci
+        
       - name: Build Testing
         run: npm run build category --if-present
-
 
       - name: Build
         run: |-
@@ -70,13 +71,6 @@ jobs:
            --build-arg GITHUB_SHA="$GITHUB_SHA" \
            --build-arg GITHUB_REF="$GITHUB_REF" \
            ./apps/category
-        
-   #     with:
-    #      context: './BE'
-    #      file: './BE/apps/category/Dockerfile'
-    #      target: production
-    #      tags: gcr.io/${{env.PROJECT_ID}}/${{env.IMAGE}}:${{github.sha}}
-
         
       
           
