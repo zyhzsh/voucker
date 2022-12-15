@@ -1,5 +1,5 @@
 import NavBar from '../app/components/NavBar';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import { Location } from '../app/types/Location';
 import { useState } from 'react';
 import { Category } from '../app/types/Category';
@@ -76,7 +76,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
 };
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const locationRes = await fetch(`${process.env.BACKEND_URL}/location`);
   const locations: Location[] = (await locationRes?.json()) || [];
   const categoryRes = await fetch(`${process.env.BACKEND_URL}/category`);
@@ -93,3 +93,20 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const locationRes = await fetch(`${process.env.BACKEND_URL}/location`);
+//   const locations: Location[] = (await locationRes?.json()) || [];
+//   const categoryRes = await fetch(`${process.env.BACKEND_URL}/category`);
+//   const categories: Category[] = (await categoryRes?.json()) || [];
+//   const voucherRes = await fetch(
+//     `${process.env.BACKEND_URL}/voucher/published/?location=${locations[0].name}&category=${categories[0].name}`
+//   );
+//   const vouchers: Voucher[] = (await voucherRes?.json()) || [];
+//   return {
+//     props: {
+//       locations,
+//       categories,
+//       vouchers,
+//     },
+//   };
+// };
