@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: category-service-api
-          image: category-service
+          image: gcr.io/PROJECT_ID/IMAGE:TAG
           resources:
             requests:
               cpu: 100m
