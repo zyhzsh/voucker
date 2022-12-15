@@ -59,36 +59,26 @@ jobs:
           cache-dependency-path: './BE/package-lock.json'
       - name: Install dependencies
         run: npm ci
-      - name: Run Build
+      - name: Build Testing
         run: npm run build category --if-present
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-        
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-          
+
       - name: Build
-        uses: docker/build-push-action@v3
-        with:
-          context: './BE'
-          file: './BE/apps/category/Dockerfile'
-          target: production
-          tags: gcr.io/${{env.PROJECT_ID}}/${{env.IMAGE}}:${{github.sha}}
-
-
-
-
-
-
-        
-        
-      - name: Build Docker image
         run: |-
-           docker build \
-             --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
-             --build-arg GITHUB_SHA="$GITHUB_SHA" \
-             --build-arg GITHUB_REF="$GITHUB_REF" \
+          docker build \
+           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+           --build-arg GITHUB_SHA="$GITHUB_SHA" \
+           --build-arg GITHUB_REF="$GITHUB_REF" \
+           ./apps/category
+        
+   #     with:
+    #      context: './BE'
+    #      file: './BE/apps/category/Dockerfile'
+    #      target: production
+    #      tags: gcr.io/${{env.PROJECT_ID}}/${{env.IMAGE}}:${{github.sha}}
+
+        
+      
           
 #       - name: Publish
 #         run: |-
