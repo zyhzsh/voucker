@@ -1,0 +1,65 @@
+name: Category Service CI/CD
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+env:
+  PROJECT_ID: ${{secrets.GKE_PROJECT}}
+  GKE_CLUSTER: autopilot-cluster-voucker-platform
+  GKE_ZONE: europe-west1
+  DEPLOYMENT_NAME: github_action_automation_deployment
+  IMAGE: category-service-api
+  # TAG: 0.0.1
+
+jobs:
+  setup-build-publish-deply:
+    name: Set up Build Publish Deploy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './BE'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: './BE/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Build
+        run: npm run build category --if-present
+
+      # - name: Setup Google Cloud CLI
+      #   uses: google-github-actions/auth@v0
+      #   with:
+      #   credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - name: Setup Google Cloud CLI
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.3
+        env:
+          ACTIONS_ALLOWS_UNSECURE_COMMANDS: true
+        with:
+          service_account_key: ${{secrets.GKE_SA_KEY}}
+          project_id: ${{secrets.GKE_PROJECT}}
+
+      - name: Configure Docker
+        run: |-
+          gcloud --quiet auth configure-docker
+      - name: Get GKE Credentials
+        run: |-
+          gcloud container clusters get-credential "$GKE_CLUSTER" --zone "$GKE_ZONE"
+
+      - name: Build Docker image
+        run: |-
+          docker build --tag "gcr.io/$PROJECT_ID/$IMAGE:${{github.sha}}"
+      - name: Publish Docker image to gcr
+        run: |-
+          docker push push "gcr.io/$PROJECT_ID/$IMAGE:${{github.sha}}"
