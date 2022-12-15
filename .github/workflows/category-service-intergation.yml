@@ -16,10 +16,15 @@ jobs:
   Setup-Runner:
     name: Set up Build Publish Deploy
     runs-on: ubuntu-latest
+    environment: production
 
     permissions:
       contents: 'read'
       id-token: 'write'
+
+    defaults:
+      run:
+        working-directory: './BE'
 
     steps:
       - name: Checkout Repository
@@ -44,14 +49,6 @@ jobs:
 
   Build-Test:
     needs: Setup-Runner
-
-    runs-on: ubuntu-latest
-
-    environment: production
-
-    defaults:
-      run:
-        working-directory: './BE'
 
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
