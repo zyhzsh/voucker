@@ -26,9 +26,4 @@ export class InventoryController {
     console.log(data);
     this.rmqService.ack(context);
   }
-
-  @Get()
-  getHello(): string {
-    return 'sss';
-  }
 }

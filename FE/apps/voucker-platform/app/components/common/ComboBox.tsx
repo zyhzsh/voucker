@@ -76,6 +76,7 @@ const ComboBox: React.FC<ComboBoxProps> = ({
                       )}
                     >
                       {option.name}
+                      {/* {option.name} */}
                     </span>
 
                     {selected && (

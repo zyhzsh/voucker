@@ -18,6 +18,7 @@ export class LocationController {
 
   @Get()
   getAllLocation() {
+    console.log('sssss');
     return this.locationService.getAllLocation();
   }
   @Delete()

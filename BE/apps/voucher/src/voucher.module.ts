@@ -9,6 +9,7 @@ import { STORE_SERVICE, INVENTORY_SERVICE } from '../constants/services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Voucher } from './entities/voucher.entity';
 import { Store } from './entities/store.entity';
+import { HealthController } from './healthcheck.controller';
 
 @Module({
   imports: [
@@ -49,7 +50,7 @@ import { Store } from './entities/store.entity';
       name: INVENTORY_SERVICE,
     }),
   ],
-  controllers: [VoucherController],
+  controllers: [VoucherController, HealthController],
   providers: [VoucherService],
 })
 export class VoucherModule {}

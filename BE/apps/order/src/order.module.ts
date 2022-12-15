@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RmqModule } from '@app/common';
 import { Order } from './entities/order.entity';
 import { INVENTORY_SERVICE } from '../constants/services';
+import { HealthController } from './healthcheck.controller';
 
 @Module({
   imports: [
@@ -43,7 +44,7 @@ import { INVENTORY_SERVICE } from '../constants/services';
       name: INVENTORY_SERVICE,
     }),
   ],
-  controllers: [OrderController],
+  controllers: [OrderController, HealthController],
   providers: [OrderService],
 })
 export class OrderModule {}

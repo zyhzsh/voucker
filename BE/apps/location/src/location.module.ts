@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { RmqModule } from '@app/common';
 import { Location } from './entities/location.entity';
+import { HealthController } from './healthcheck.controller';
 
 @Module({
   imports: [
@@ -40,7 +41,7 @@ import { Location } from './entities/location.entity';
     TypeOrmModule.forFeature([Location]),
     RmqModule,
   ],
-  controllers: [LocationController],
+  controllers: [LocationController, HealthController],
   providers: [LocationService],
 })
 export class LocationModule {}

@@ -20,6 +20,7 @@ async function bootstrap() {
       },
     }),
   );
+  console.log('Location Module booted');
   const configService = app.get(ConfigService);
   await app.startAllMicroservices();
   await app.listen(configService.get('PORT'));

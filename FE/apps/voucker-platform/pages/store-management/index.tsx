@@ -258,6 +258,8 @@ export const getServerSideProps = withPageAuthRequired({
     const { accessToken } = await getAccessToken(context.req, context.res);
     const vendor_id = getUserId(accessToken);
     // Get Vendor's Stores
+    console.log(`----------------------------------------`);
+    console.log(accessToken);
     let storesReq = await requestHandler
       .attchToken(accessToken)
       .get(`store/mystores/${vendor_id}`);

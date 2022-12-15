@@ -10,8 +10,8 @@ services:
       - ./apps/voucher/.env.local.dev
     command: npm run start:dev voucher
     depends_on:
-      - test_database
-    #      - rabbitmq
+      #  - test_database
+      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -28,8 +28,8 @@ services:
     command: npm run start:dev store
 
     depends_on:
-      - test_database
-    #     - rabbitmq
+      #  - test_database
+      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -45,8 +45,8 @@ services:
       - ./apps/location/.env.local.dev
     command: npm run start:dev location
     depends_on:
-      - test_database
-    #     - rabbitmq
+      #  - test_database
+      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -62,8 +62,8 @@ services:
       - ./apps/category/.env.local.dev
     command: npm run start:dev category
     depends_on:
-      - test_database
-    #     - rabbitmq
+      # - test_database
+      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -79,8 +79,8 @@ services:
       - ./apps/order/.env.local.dev
     command: npm run start:dev order
     depends_on:
-      - test_database
-    #     - rabbitmq
+      # - test_database
+      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -96,25 +96,24 @@ services:
       - ./apps/inventory/.env.local.dev
     command: npm run start:dev inventory
     depends_on:
-      - test_database
-      #     - rabbitmq
+      # - test_database
+      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
       - '4003:3000'
-
-  test_database:
-    container_name: test_database
-    image: postgres
-    restart: always
-    ports:
-      - '5432:5432'
-    volumes:
-      - ./test_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-    environment:
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USER=root
+  # test_database:
+  #   container_name: test_database
+  #   image: postgres
+  #   restart: always
+  #   ports:
+  #     - '5432:5432'
+  #   volumes:
+  #     - ./test_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+  #   environment:
+  #     - POSTGRES_PASSWORD=root
+  #     - POSTGRES_USER=root
   nginx_load_balancer:
     container_name: loader_balancer
     image: nginx
@@ -123,9 +122,9 @@ services:
     ports:
       - '80:80'
 
-  # rabbitmq:
-  #   container_name: event_bus
-  #   image: rabbitmq:3-management
-  #   ports:
-  #     - '8080:15672'
-  #     - '5672:5672'
+  rabbitmq:
+    container_name: event_bus
+    image: rabbitmq:3-management
+    ports:
+      - '8080:15672'
+      - '5672:5672'
