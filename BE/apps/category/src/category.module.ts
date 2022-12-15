@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { RmqModule } from '@app/common';
 import { Category } from './entities/category.entity';
+import { HealthController } from './healthcheck.controller';
 
 @Module({
   imports: [
@@ -40,7 +41,7 @@ import { Category } from './entities/category.entity';
     TypeOrmModule.forFeature([Category]),
     RmqModule,
   ],
-  controllers: [CategoryController],
+  controllers: [CategoryController, HealthController],
   providers: [CategoryService],
 })
 export class CategoryModule {}
