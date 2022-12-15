@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: category-service-api
-          image: vouckerplatform/category-service
+          image: category-service
           resources:
             requests:
               cpu: 100m
