@@ -74,7 +74,7 @@ jobs:
           
       - name: Publish to Google Registry
         run: |-
-            docker push gcr.io/${{env.PROJECT_ID}}/$IMAGE:${{env.GITHUB_SHA}}
+            docker push "gcr.io/voucker/$IMAGE:$GITHUB_SHA"
 
           
           
