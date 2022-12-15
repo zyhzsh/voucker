@@ -38,7 +38,7 @@ jobs:
            
       - name: Docker configuration
         run: |-
-          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://$GAR_LOCATION-docker.pkg.dev
+          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://${{env.GAR_LOCATION}}-docker.pkg.dev
  
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
