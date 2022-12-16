@@ -1,8 +1,8 @@
 name: Category Service Build Test Deploy
 on:
-  push:
-    branches: ['main']
   pull_request:
+    branches: ['main']
+  push:
     branches: ['main']
 
 env:
@@ -13,7 +13,24 @@ env:
   IMAGE: category-service
 
 jobs:
+  Dependency-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v3
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v3
+        with:
+          fail-on-severity: moderate
+
+          # Use comma-separated names to pass list arguments:
+          deny-licenses: LGPL-2.0, BSD-2-Clause
+
   Build-Test-Publish-Deploy:
+    needs: Dependency-review
     name: Set up Build Publish Deploy
     runs-on: ubuntu-latest
     environment: production
