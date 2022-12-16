@@ -79,7 +79,7 @@ jobs:
         run: |-
           gcloud --quiet auth configure-docker
 
-            - name: Setup GKE Credentials
+      - name: Setup GKE Credentials
         uses: google-github-actions/get-gke-credentials@v0.2.1
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
