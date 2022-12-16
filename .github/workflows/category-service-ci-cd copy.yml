@@ -20,7 +20,7 @@ jobs:
         working-directory: './BE'
     strategy:
       matrix:
-        node-version: [18.×]
+        node-version: [14.x, 16.x, 18.×]
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
