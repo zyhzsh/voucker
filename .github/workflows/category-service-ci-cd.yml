@@ -13,7 +13,16 @@ env:
   IMAGE: category-service
 
 jobs:
+  Dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v3
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v2
+
   Build-Test-Publish-Deploy:
+    needs: Dependency-review
     name: Set up Build Publish Deploy
     runs-on: ubuntu-latest
     environment: production
