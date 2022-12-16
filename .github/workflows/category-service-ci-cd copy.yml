@@ -14,10 +14,10 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest defaults:
+    runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: "/BE"
+        working-directory: '/BE'
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -31,13 +31,6 @@ jobs:
 
       - name: Build Testing
         run: npm run build category --if-present
-
-
-
-
-
-
-
 
     # steps:
     #   - name: Checkout Repository
@@ -94,7 +87,7 @@ jobs:
     #   # Deploy the Docker image to the GKE cluster
     #   - name: Deploy
     #     run: |-
-    #       cd .. 
+    #       cd ..
     #       cd k8s
     #       cd category
     #       kustomize edit set image $IMAGE=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
