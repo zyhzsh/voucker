@@ -1,0 +1,12 @@
+# Basic dependabot.yml file with
+# minimum configuration for two package managers
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/BE'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'npm'
+    directory: '/FE'
+    schedule:
+      interval: 'daily'
