@@ -83,7 +83,8 @@ jobs:
         run: |-`
           cd .. 
           cd k8s
+          cd voucher
           kustomize edit set image $IMAGE=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-          kustomize build . | kubectl apply -f voucher-service-deployment.yaml
+          kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
