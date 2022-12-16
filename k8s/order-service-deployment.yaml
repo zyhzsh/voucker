@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: order-service-api
-          image: vouckerplatform/order-service
+          image: order-service
           resources:
             requests:
               cpu: 512m

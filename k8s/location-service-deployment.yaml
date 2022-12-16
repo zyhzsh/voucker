@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: location-service-api
-          image: vouckerplatform/location-service:test
+          image: location-service
           resources:
             requests:
               cpu: 512m

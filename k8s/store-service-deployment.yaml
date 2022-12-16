@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: store-service-api
-          image: vouckerplatform/store-service:xxxx
+          image: store-service
           resources:
             requests:
               cpu: 512m

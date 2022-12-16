@@ -14,14 +14,11 @@ spec:
     spec:
       containers:
         - name: inventory-service-api
-          image: vouckerplatform/inventory-service
+          image: inventory-service
           resources:
             requests:
               cpu: 512m
               memory: 250Mi
-            limits:
-              cpu: 100m
-              memory: 128Mi
           env:
             - name: RABBIT_MQ_URI
               valueFrom:

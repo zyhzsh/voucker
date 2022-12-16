@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: voucher-service-api
-          image: vouckerplatform/voucher-service
+          image: voucher-service
           resources:
             requests:
               cpu: 512m
