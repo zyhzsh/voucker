@@ -13,7 +13,7 @@ env:
   IMAGE: category-service
 
 jobs:
-  Setup-Runner:
+  Build-Test-Publish-Deploy:
     name: Set up Build Publish Deploy
     runs-on: ubuntu-latest
     environment: production
@@ -47,10 +47,6 @@ jobs:
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
 
-  Build-Test:
-    needs: Setup-Runner
-
-    steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
