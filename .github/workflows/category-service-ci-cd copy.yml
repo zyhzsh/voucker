@@ -56,7 +56,7 @@ jobs:
         run: npm ci
 
       - name: Build Testing
-        run: npm run test category --if-present
+        run: npm run build category --if-present
 
   Publishing-Deploy:
     needs: [Build, Test]
