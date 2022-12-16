@@ -1,9 +1,10 @@
 name: Category Service Build Test Deploy
 on:
-  pull_request:
-    branches: ['main']
-  push:
-    branches: ['main']
+  ['pull_request': { 'branches': ['main'] }, 'push': { 'branches': ['main'] }]
+  # pull_request:
+  #   branches: ['main']
+  # push:
+  #   branches: ['main']
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -13,11 +14,8 @@ env:
   IMAGE: category-service
 
 jobs:
-  Dependency-review:
+  dependency-review:
     runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v3
@@ -25,12 +23,10 @@ jobs:
         uses: actions/dependency-review-action@v3
         with:
           fail-on-severity: moderate
-
           # Use comma-separated names to pass list arguments:
           deny-licenses: LGPL-2.0, BSD-2-Clause
 
   Build-Test-Publish-Deploy:
-    needs: Dependency-review
     name: Set up Build Publish Deploy
     runs-on: ubuntu-latest
     environment: production
