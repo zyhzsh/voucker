@@ -17,11 +17,8 @@ spec:
           image: category-service
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 512m
+              memory: 250Mi
           env:
             - name: RABBIT_MQ_URI
               valueFrom:
