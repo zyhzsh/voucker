@@ -15,7 +15,7 @@
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.11",
     "@mui/material": "^5.10.14",
-    "@mui/x-data-grid": "^5.17.11",
+    "@mui/x-data-grid": "^5.17.16",
     "@stripe/stripe-js": "^1.46.0",
     "@types/node": "^18.8.0",
     "@types/react": "^18.0.21",
