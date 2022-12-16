@@ -83,7 +83,8 @@ jobs:
         run: |-
           cd .. 
           cd k8s
-          kustomize edit set image $IMAGE=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-          kustomize build . | kubectl apply -f category-service-deployment.yaml
+          kustomize edit set image category-service=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          kustomize build category-service-deployment.yaml | kubectl apply -f category-service-deployment.yaml
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
+
