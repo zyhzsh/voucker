@@ -1,4 +1,4 @@
-name: Voucher Service Build Test Deploy
+name: Voucher Service Build , Test , Deploy
 on:
   push:
     branches: ['main']
@@ -86,7 +86,7 @@ jobs:
         uses: google-github-actions/get-gke-credentials@v0.2.1
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
-          voucher: ${{ env.GKE_ZONE }}
+          location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
 
       - name: Build Docker Image
