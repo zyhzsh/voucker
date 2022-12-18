@@ -29,7 +29,7 @@ export class OrderController {
   }
 
   @Post()
-  // @UseGuards(AuthorizationGuard, PermissionsGuard)
+  //@UseGuards(AuthorizationGuard, PermissionsGuard)
   placeOrder(@Body() createOrderDto: CreateOrderDto) {
     return this.orderService.createOrder(createOrderDto);
   }

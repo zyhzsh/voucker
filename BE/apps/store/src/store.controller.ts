@@ -5,7 +5,6 @@ import {
   Controller,
   Get,
   Param,
-  Patch,
   UseGuards,
 } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';

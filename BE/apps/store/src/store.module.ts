@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Store } from './entities/store.entity';
 import { Voucher } from './entities/voucher.entity';
 import { HealthController } from './healthcheck.controller';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -39,7 +40,6 @@ import { HealthController } from './healthcheck.controller';
       entities: ['dist/store/**/*.entity.js'],
     }),
     TypeOrmModule.forFeature([Store, Voucher]),
-    //TODO:  //Register comsuer serviers
     RmqModule,
   ],
   controllers: [StoreController, HealthController],

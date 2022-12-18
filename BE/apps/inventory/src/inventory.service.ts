@@ -32,6 +32,7 @@ export class InventoryService {
       //this.storeClient.emit('order_confirmed', voucher_id);
       //this.voucherClient.emit('inventory_updated', voucher_id);
     } else {
+      console.log('order_confirm_failed');
       this.orderClient.emit('order_confirm_failed', id);
     }
   }

@@ -256,6 +256,7 @@ export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(context) {
     // Getting Access Token from Auth0
     const { accessToken } = await getAccessToken(context.req, context.res);
+    console.log(accessToken);
     const vendor_id = getUserId(accessToken);
     // Get Vendor's Stores
     console.log(`----------------------------------------`);
