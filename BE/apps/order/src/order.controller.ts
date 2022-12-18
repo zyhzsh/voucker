@@ -1,4 +1,6 @@
-import { AuthorizationGuard, PermissionsGuard, RmqService } from '@app/common';
+//import { AuthorizationGuard, PermissionsGuard, RmqService } from '@app/common';
+// A better way to import "RmqModules" modules, but the test file can't import it,Therefire comment this out
+import { RmqService } from '../../../libs/common/src/rmq/rmq.service';
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { CreateOrderDto } from './dto/create-order.dto';

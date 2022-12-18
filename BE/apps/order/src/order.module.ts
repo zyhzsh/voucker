@@ -4,7 +4,9 @@ import { OrderService } from './order.service';
 import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { RmqModule } from '@app/common';
+// A better way to import "RmqModules" modules, but the test file can't import it,Therefire comment this out
+// import { RmqModule } from '@app/common';
+import { RmqModule } from '../../../libs/common/src/rmq/rmq.module';
 import { Order } from './entities/order.entity';
 import { INVENTORY_SERVICE } from '../constants/services';
 import { HealthController } from './healthcheck.controller';

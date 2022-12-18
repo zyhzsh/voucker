@@ -5,12 +5,37 @@ on:
   pull_request:
     branches: ['main']
 
+# env:
+#   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+#   GKE_CLUSTER: autopilot-cluster-voucker-platform
+#   GKE_ZONE: europe-west1
+#   DEPLOYMENT_NAME: order-service-api
+#   IMAGE: order-service
 env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: autopilot-cluster-voucker-platform
-  GKE_ZONE: europe-west1
-  DEPLOYMENT_NAME: order-service-api
-  IMAGE: order-service
+  # Rabbmit MQ For Linux
+  RABBIT_MQ_URI: amqp://172.17.0.1:5672
+
+  # Rabbmit MQ Services
+  RABBIT_MQ_ORDER_QUEUE: ORDER
+
+  RABBIT_MQ_INVENTORY_QUEUE: INVENTORY
+
+  # Listening port
+  PORT: 3000
+
+  # Auth
+  AUTH0_AUDIENCE: ${{ secrets.AUTH0_AUDIENCE }}
+  AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+
+  # PosgreSql Database varialble
+  DATABASE_USER: root
+  DATABASE_PASSWORD: root
+  DATABASE_NAME: order_db
+  DATABASE_PORT: 5432
+  # For Mac
+  # DATABASE_HOST=host.docker.internal
+  # For Linux
+  DATABASE_HOST: 172.17.0.1
 
 jobs:
   Build:
@@ -58,8 +83,11 @@ jobs:
       - name: Unit, Intergation Test
         run: npm run test .
 
+      - name: Run Docker Compose
+        run: docker compose -f docker-compose.test.yml up -d --build
+
       - name: E2E Test
-        run: npm run test:e2e .
+        run: npm run test:e2e-order
 
   Publishing-Deploy:
     needs: [Build, Test]

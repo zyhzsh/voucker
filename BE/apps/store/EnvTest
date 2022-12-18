@@ -1,0 +1,28 @@
+########################################
+# Local Dev Setting For Dokcer Compose #
+########################################
+
+# Rabbmit MQ For Mac 
+# RABBIT_MQ_URI=amqp://host.docker.internal:5672
+
+# Rabbmit MQ For Linux 
+RABBIT_MQ_URI=amqp://172.17.0.1:5672
+# Rabbmit MQ Services
+RABBIT_MQ_STORE_QUEUE=STORE
+
+# Listening Port
+PORT=3000
+
+# Auth
+AUTH0_AUDIENCE=voucker-nestjs-api
+AUTH0_DOMAIN=https://dev-gl5r1aa7.eu.auth0.com/
+
+# PosgreSql Database varialble
+DATABASE_USER=root
+DATABASE_PASSWORD=root
+DATABASE_NAME=store_db
+DATABASE_PORT=5432
+# For Mac 
+# DATABASE_HOST=host.docker.internal
+# For Linux
+DATABASE_HOST=172.17.0.1

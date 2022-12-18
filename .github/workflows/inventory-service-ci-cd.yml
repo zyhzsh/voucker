@@ -5,12 +5,12 @@ on:
   pull_request:
     branches: ['main']
 
-env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: autopilot-cluster-voucker-platform
-  GKE_ZONE: europe-west1
-  DEPLOYMENT_NAME: inventory-service-api
-  IMAGE: inventory-service
+# env:
+#   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+#   GKE_CLUSTER: autopilot-cluster-voucker-platform
+#   GKE_ZONE: europe-west1
+#   DEPLOYMENT_NAME: inventory-service-api
+#   IMAGE: inventory-service
 
 jobs:
   Build:
@@ -58,8 +58,8 @@ jobs:
       - name: Unit, Intergation Test
         run: npm run test .
 
-      - name: E2E Test
-        run: npm run test:e2e .
+      # - name: E2E Test
+      #   run: npm run test:e2e-inventory
 
   Publishing-Deploy:
     needs: [Build, Test]
