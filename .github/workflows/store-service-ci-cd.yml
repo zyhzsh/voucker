@@ -58,8 +58,8 @@ jobs:
       - name: Unit, Intergation Test
         run: npm run test .
 
-      - name: E2E Test
-        run: npm run test:e2e-store
+      # - name: E2E Test
+      #   run: npm run test:e2e-store
 
   Publishing-Deploy:
     needs: [Build, Test]
