@@ -56,10 +56,14 @@ jobs:
         run: npm ci
 
       - name: Unit, Intergation Test
-        run: npm run test .
+        run: npm run test
+
+      - name: Run Docker Compose
+        run: docker compose -f docker-compose.test.yml up -d --build
 
       - name: E2E Test
         run: npm run test:e2e-category
+
   Publishing-Deploy:
     needs: [Build, Test]
     runs-on: ubuntu-latest
