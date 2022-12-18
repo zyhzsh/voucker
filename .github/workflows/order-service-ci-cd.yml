@@ -62,7 +62,7 @@ jobs:
         run: docker compose -f docker-compose.test.yml up -d --build
 
       - name: E2E Test
-        run: npm run test:e2e order
+        run: npm run test:e2e-order
 
   Publishing-Deploy:
     needs: [Build, Test]
