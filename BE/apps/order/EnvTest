@@ -2,8 +2,12 @@
 # Local Dev Setting For Dokcer Compose #
 ########################################
 
-# Rabbmit MQ
-RABBIT_MQ_URI=amqp://host.docker.internal:5672
+# Rabbmit MQ For Mac 
+# RABBIT_MQ_URI=amqp://host.docker.internal:5672
+
+# Rabbmit MQ For Linux 
+RABBIT_MQ_URI=amqp://172.17.0.1:5672
+
 # Rabbmit MQ Services
 RABBIT_MQ_ORDER_QUEUE=ORDER
 RABBIT_MQ_INVENTORY_QUEUE=INVENTORY
@@ -20,4 +24,7 @@ DATABASE_USER=root
 DATABASE_PASSWORD=root
 DATABASE_NAME=order_db
 DATABASE_PORT=5432
-DATABASE_HOST=host.docker.internal
+# For Mac 
+# DATABASE_HOST=host.docker.internal
+# For Linux
+DATABASE_HOST=172.17.0.1
