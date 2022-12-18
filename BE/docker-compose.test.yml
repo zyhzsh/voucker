@@ -7,7 +7,7 @@ services:
       dockerfile: ./apps/voucher/Dockerfile
       target: development
     env_file:
-      - ./apps/voucher/.env.local.dev
+      - ./apps/voucher/EnvTest
     command: npm run start:dev voucher
     depends_on:
       - test_database
@@ -24,7 +24,7 @@ services:
       dockerfile: ./apps/store/Dockerfile
       target: development
     env_file:
-      - ./apps/store/.env.local.dev
+      - ./apps/store/EnvTest
     command: npm run start:dev store
 
     depends_on:
@@ -42,7 +42,7 @@ services:
       dockerfile: ./apps/location/Dockerfile
       target: development
     env_file:
-      - ./apps/location/.env.local.dev
+      - ./apps/location/EnvTest
     command: npm run start:dev location
     depends_on:
       - test_database
@@ -59,7 +59,7 @@ services:
       dockerfile: ./apps/category/Dockerfile
       target: development
     env_file:
-      - ./apps/category/.env.local.dev
+      - ./apps/category/EnvTest
     command: npm run start:dev category
     depends_on:
       - test_database
@@ -76,7 +76,7 @@ services:
       dockerfile: ./apps/order/Dockerfile
       target: development
     env_file:
-      - ./apps/order/.env.local.dev
+      - ./apps/order/EnvTest
     command: npm run start:dev order
     depends_on:
       - test_database
@@ -93,7 +93,7 @@ services:
       dockerfile: ./apps/inventory/Dockerfile
       target: development
     env_file:
-      - ./apps/inventory/.env.local.dev
+      - ./apps/inventory/EnvTest
     command: npm run start:dev inventory
     depends_on:
       - test_database

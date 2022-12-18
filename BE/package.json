@@ -18,7 +18,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest ./apps/BE/test/jest-e2e.json"
+    "test:e2e-order": "jest --config ./apps/order/test/jest-e2e.json --no-cache --forceExit",
+    "test:e2e-location": "jest --config ./apps/location/test/jest-e2e.json --no-cache --forceExit",
+    "test:e2e-inventory": "jest --config ./apps/inventory/test/jest-e2e.json --no-cache --forceExit",
+    "test:e2e-voucher": "jest --config ./apps/voucher/test/jest-e2e.json --no-cache --forceExit",
+    "test:e2e-store": "jest --config ./apps/store/test/jest-e2e.json --no-cache --forceExit",
+    "test:e2e-category": "jest --config ./apps/category/test/jest-e2e.json --no-cache --forceExit"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
