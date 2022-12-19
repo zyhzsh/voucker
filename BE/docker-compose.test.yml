@@ -5,10 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./apps/voucher/Dockerfile
-      target: development
+      target: production
     env_file:
       - ./apps/voucher/EnvTest
-    command: npm run start:dev voucher
     depends_on:
       - test_database
       - rabbitmq
@@ -22,10 +21,9 @@ services:
     build:
       context: .
       dockerfile: ./apps/store/Dockerfile
-      target: development
+      target: production
     env_file:
       - ./apps/store/EnvTest
-    command: npm run start:dev store
 
     depends_on:
       - test_database
@@ -40,10 +38,9 @@ services:
     build:
       context: .
       dockerfile: ./apps/location/Dockerfile
-      target: development
+      target: production
     env_file:
       - ./apps/location/EnvTest
-    command: npm run start:dev location
     depends_on:
       - test_database
       - rabbitmq
@@ -57,10 +54,9 @@ services:
     build:
       context: .
       dockerfile: ./apps/category/Dockerfile
-      target: development
+      target: production
     env_file:
       - ./apps/category/EnvTest
-    command: npm run start:dev category
     depends_on:
       - test_database
       - rabbitmq
@@ -74,10 +70,9 @@ services:
     build:
       context: .
       dockerfile: ./apps/order/Dockerfile
-      target: development
+      target: production
     env_file:
       - ./apps/order/EnvTest
-    command: npm run start:dev order
     depends_on:
       - test_database
       - rabbitmq
@@ -91,10 +86,9 @@ services:
     build:
       context: .
       dockerfile: ./apps/inventory/Dockerfile
-      target: development
+      target: production
     env_file:
       - ./apps/inventory/EnvTest
-    command: npm run start:dev inventory
     depends_on:
       - test_database
       - rabbitmq
