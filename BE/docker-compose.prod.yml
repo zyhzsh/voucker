@@ -1,15 +1,15 @@
 version: '3.9'
 services:
   voucher_service:
+    platform: linux/amd64
     container_name: voucher_service
     build:
       context: .
       dockerfile: ./apps/voucher/Dockerfile
       target: production
     env_file:
-      - ./apps/voucher/EnvTest
+      - ./apps/voucher/.env
     depends_on:
-      - test_database
       - rabbitmq
     volumes:
       - .:/usr/src/app
@@ -17,16 +17,15 @@ services:
     ports:
       - '4000:3000'
   store_service:
+    platform: linux/amd64
     container_name: store_service
     build:
       context: .
       dockerfile: ./apps/store/Dockerfile
       target: production
     env_file:
-      - ./apps/store/EnvTest
-
+      - ./apps/store/.env
     depends_on:
-      - test_database
       - rabbitmq
     volumes:
       - .:/usr/src/app
@@ -34,15 +33,15 @@ services:
     ports:
       - '4001:3000'
   location_service:
+    platform: linux/amd64
     container_name: location_service
     build:
       context: .
       dockerfile: ./apps/location/Dockerfile
       target: production
     env_file:
-      - ./apps/location/EnvTest
+      - ./apps/location/.env
     depends_on:
-      - test_database
       - rabbitmq
     volumes:
       - .:/usr/src/app
@@ -50,15 +49,15 @@ services:
     ports:
       - '4005:3000'
   category_service:
+    platform: linux/amd64
     container_name: category_service
     build:
       context: .
       dockerfile: ./apps/category/Dockerfile
       target: production
     env_file:
-      - ./apps/category/EnvTest
+      - ./apps/category/.env
     depends_on:
-      - test_database
       - rabbitmq
     volumes:
       - .:/usr/src/app
@@ -66,15 +65,15 @@ services:
     ports:
       - '4004:3000'
   order_service:
+    platform: linux/amd64
     container_name: order_service
     build:
       context: .
       dockerfile: ./apps/order/Dockerfile
       target: production
     env_file:
-      - ./apps/order/EnvTest
+      - ./apps/order/.env
     depends_on:
-      - test_database
       - rabbitmq
     volumes:
       - .:/usr/src/app
@@ -82,15 +81,15 @@ services:
     ports:
       - '4002:3000'
   inventory_service:
+    platform: linux/amd64  
     container_name: inventory_service
     build:
       context: .
       dockerfile: ./apps/inventory/Dockerfile
       target: production
     env_file:
-      - ./apps/inventory/EnvTest
+      - ./apps/inventory/.env
     depends_on:
-      - test_database
       - rabbitmq
     volumes:
       - .:/usr/src/app
@@ -98,29 +97,17 @@ services:
     ports:
       - '4003:3000'
 
-  test_database:
-    container_name: test_database
-    image: postgres
-    restart: always
-    ports:
-      - '5432:5432'
-    volumes:
-      - ./test_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-    environment:
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USER=root
-
   nginx_load_balancer:
     container_name: loader_balancer
     image: nginx
+    restart: always
     volumes:
       - ./nginx/unbuntu/default.conf:/etc/nginx/nginx.conf
     ports:
       - '80:80'
-
   rabbitmq:
     container_name: event_bus
-    image: rabbitmq:3-management
+    image: rabbitmq
+    restart: always
     ports:
-      - '8080:15672'
       - '5672:5672'
