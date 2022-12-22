@@ -35,7 +35,7 @@ const Home: React.FC<HomePageProps> = ({ locations, categories, vouchers }) => {
       `${process.env.NEXT_PUBLIC_URL}/voucher/published/?location=${location?.name}&category=${selectedCategory?.name}`
     );
     const data: Voucher[] = (await response?.json()) || [];
-    setSelectedLocation(selectedLocation);
+    setSelectedLocation(location);
     setPublishedVouchers(data);
   };
   const onChangeCategory = async (category: Category) => {

@@ -29,7 +29,6 @@ export default async function handler(req, res) {
       const session = await stripe.checkout.sessions.create({
         line_items: [{
           price_data: {
-            currency: 'usd',
             // To accept `ideal`, all line items must have currency: eur
             currency: 'eur',
             product_data: {
