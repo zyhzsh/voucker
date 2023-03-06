@@ -17,7 +17,7 @@
     "@mui/material": "^5.10.14",
     "@mui/x-data-grid": "^5.17.16",
     "@stripe/stripe-js": "^1.46.0",
-    "@types/node": "^18.8.0",
+    "@types/node": "^18.14.6",
     "@types/react": "^18.0.21",
     "axios": "^0.27.2",
     "headlessui": "^0.0.0",
